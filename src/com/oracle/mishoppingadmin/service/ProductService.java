@@ -1,4 +1,4 @@
 package com.oracle.mishoppingadmin.service;
 
-public class ProductService {
+public interface ProductService {
 }
