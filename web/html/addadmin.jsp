@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Flat Admin V.2 - Free Bootstrap Admin Templates</title>
+    <title>添加管理员</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
@@ -327,7 +327,7 @@
         <script type="text/javascript" src="../lib/js/ace/theme-github.js"></script>
         <!-- Javascript -->
         <script type="text/javascript" src="../js/app.js"></script>
-        <script type="text/javascript" src="active.js"></script>
+        <script type="text/javascript" src="../js/active.js"></script>
 
     </div>
 </div>

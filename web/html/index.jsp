@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>添加管理员</title>
+    <title>管理员界面</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <!-- Fonts -->
@@ -261,7 +261,7 @@
         <!-- Javascript -->
         <script type="text/javascript" src="../js/app.js"></script>
         <script type="text/javascript" src="../js/index.js"></script>
-        <script type="text/javascript" src="active.js"></script>
+        <script type="text/javascript" src="../js/active.js"></script>
     </div>
 </div>
 

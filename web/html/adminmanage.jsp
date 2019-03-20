@@ -551,7 +551,7 @@
         <script type="text/javascript" src="../lib/js/ace/theme-github.js"></script>
         <!-- Javascript -->
         <script type="text/javascript" src="../js/app.js"></script>
-        <script type="text/javascript" src="active.js"></script>
+        <script type="text/javascript" src="../js/active.js"></script>
 
     </div>
 </div>
