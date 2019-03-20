@@ -24,6 +24,9 @@ public class AdminController extends HttpServlet {
             case "login":
                 login(request, response);
                 break;
+            case "logout":
+                logout(request, response);
+                break;
         }
     }
 
@@ -44,7 +47,6 @@ public class AdminController extends HttpServlet {
 
         response.setContentType("text/html;charset=utf-8");
         PrintWriter writer = response.getWriter();
-        System.out.println(loginAdmin);
         if (loginAdmin != null) {
             HttpSession session = request.getSession();
             session.setAttribute("loginAdmin", loginAdmin);
@@ -52,5 +54,10 @@ public class AdminController extends HttpServlet {
         }else {
             writer.print(false);
         }
+    }
+
+    protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().invalidate();
+        response.sendRedirect("/login.jsp");
     }
 }

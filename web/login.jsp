@@ -4,10 +4,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login Form</title>
+    <title>登录</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="css/loginstyle.css">
+    <link rel="stylesheet" href="/css/loginstyle.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 </head>
@@ -16,6 +16,7 @@
 
 <div class="login">
     <h1>Login</h1>
+    <div class="notice" style="color: red; text-align: center; margin-bottom: 15px">${msg}</div>
     <form method="post" action="">
         <input type="text" name="adminname" placeholder="Username" required="required"/>
         <input type="password" name="adminpassword" placeholder="Password" required="required"/>
@@ -23,22 +24,29 @@
     </form>
 </div>
 
-<script src="js/loginindex.js"></script>
-<script src="lib/js/jquery-3.3.1.js"></script>
+<script src="/js/loginindex.js"></script>
+<script src="/lib/js/jquery-3.3.1.js"></script>
 <script>
     $(function () {
         var flag = false;
+
         $("input:lt(2)").focus(function () {
-           $(".notice").remove();
+            $(".notice").text("");
         });
 
         $("button").click(function () {
+            var adminname = $("input:first").val();
+            var adminpassword = $("input:eq(1)").val();
+
+            if (adminname.length === 0 || adminpassword.length === 0) {
+                $(".notice").text("账号或不能为空");
+                return;
+            }
+
             if (flag) {
                 return;
             }
             flag = true;
-            var adminname = $("input:first").val();
-            var adminpassword = $("input:eq(1)").val();
             $.ajax({
                 url: "/admin?method=login",
                 type: "post",
@@ -47,14 +55,13 @@
                     "adminpassword": adminpassword
                 },
                 dataType: "json",
+                cache: false,
                 success: function (data) {
                     flag = false;
                     if (data === true) {
                         location.href = "html/index.jsp";
                     } else {
-                        if ($(".notice").length === 0) {
-                            $("input:eq(0)").before("<div class='notice' style='color:red'>账号或密码错误</div>");
-                        }
+                        $(".notice").text("账号或密码错误");
                     }
                 },
                 error: function () {

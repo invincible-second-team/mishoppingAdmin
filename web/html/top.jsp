@@ -1,6 +1,11 @@
 <%@page pageEncoding="UTF-8" %>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Cache" content="no-cache">
+
 <nav class="navbar navbar-default navbar-fixed-top navbar-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -20,18 +25,16 @@
             </button>
 
             <li class="dropdown profile">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Emily
-                    Hart <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${loginAdmin.adminname} <span class="caret"></span></a>
                 <ul class="dropdown-menu animated fadeInDown">
                     <li class="profile-img">
                         <img src="../img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
                     </li>
                     <li>
                         <div class="profile-info">
-                            <h4 class="username">Emily Hart</h4>
-                            <p>emily_hart@email.com</p>
+                            <h4 class="username">${loginAdmin.adminname}</h4>
                             <div class="btn-group margin-bottom-2x" role="group">
-                                <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
+                                <button type="button" class="btn btn-default logout"><i class="fa fa-sign-out"></i>
                                     Logout
                                 </button>
                             </div>
@@ -133,3 +136,11 @@
         <!-- /.navbar-collapse -->
     </nav>
 </div>
+<script src="/lib/js/jquery-3.3.1.js"></script>
+<script>
+    $(function () {
+        $(".logout").click(function () {
+            window.location.href = "/admin?method=logout";
+        })
+    })
+</script>
