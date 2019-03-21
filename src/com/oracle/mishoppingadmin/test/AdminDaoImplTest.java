@@ -47,7 +47,7 @@ public class AdminDaoImplTest {
     @Test
     public void deleteAdmin() throws SQLException {
         Admin admin = new Admin();
-        admin.setAdminname("admin1");
+        admin.setAdminname("admin3");
         boolean b = adminDao.deleteAdmin(admin);
         System.out.println(b);
     }

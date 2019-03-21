@@ -7,7 +7,7 @@
     <title>登录</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="/css/loginstyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/loginstyle.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 </head>
@@ -24,8 +24,8 @@
     </form>
 </div>
 
-<script src="/js/loginindex.js"></script>
-<script src="/lib/js/jquery-3.3.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/loginindex.js"></script>
+<script src="${pageContext.request.contextPath}/lib/js/jquery-3.3.1.js"></script>
 <script>
     $(function () {
         var flag = false;
@@ -59,7 +59,7 @@
                 success: function (data) {
                     flag = false;
                     if (data === true) {
-                        location.href = "html/index.jsp";
+                        location.href = "/html/index.jsp";
                     } else {
                         $(".notice").text("账号或密码错误");
                     }

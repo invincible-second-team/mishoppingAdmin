@@ -10,6 +10,10 @@ public class Admin {
     public Admin() {
     }
 
+    public Admin(String adminname) {
+        this.adminname = adminname;
+    }
+
     public Admin(String adminname, String adminpassword) {
         this.adminname = adminname;
         this.adminpassword = adminpassword;

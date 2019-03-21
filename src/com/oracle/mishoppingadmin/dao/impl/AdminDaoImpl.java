@@ -16,9 +16,14 @@ public class AdminDaoImpl implements AdminDao {
 
     @Override
     public Admin selectAdmin(Admin admin) throws SQLException {
-        String sql = "select * from admin where adminname=? and adminpassword=?";
-        String password = EncodeUtil.encode(admin.getAdminpassword(), admin.getAdminname());
-        return queryRunner.query(sql, new BeanHandler<>(Admin.class), admin.getAdminname(), password);
+        if (admin.getAdminpassword() == null) {
+            String sql = "select * from admin where adminname=?";
+            return queryRunner.query(sql, new BeanHandler<>(Admin.class), admin.getAdminname());
+        } else {
+            String sql = "select * from admin where adminname=? and adminpassword=?";
+            String password = EncodeUtil.encode(admin.getAdminpassword(), admin.getAdminname());
+            return queryRunner.query(sql, new BeanHandler<>(Admin.class), admin.getAdminname(), password);
+        }
     }
 
     @Override
@@ -31,7 +36,7 @@ public class AdminDaoImpl implements AdminDao {
     public boolean updatePassword(Admin admin) throws SQLException {
         String sql = "update admin set adminpassword=? where adminname=?";
         String password = EncodeUtil.encode(admin.getAdminpassword(), admin.getAdminname());
-        int update = queryRunner.update(sql, admin.getAdminpassword(), password);
+        int update = queryRunner.update(sql, password, admin.getAdminname());
         return update != 0;
     }
 

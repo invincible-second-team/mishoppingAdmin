@@ -25,7 +25,8 @@
             </button>
 
             <li class="dropdown profile">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${loginAdmin.adminname} <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                   aria-expanded="false">${loginAdmin.adminname} <span class="caret"></span></a>
                 <ul class="dropdown-menu animated fadeInDown">
                     <li class="profile-img">
                         <img src="../img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
@@ -72,9 +73,9 @@
                     <div id="dropdown-element" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li><a href="adduser.jsp">添加用户</a>
+                                <li><a href="/html/adduser.jsp">添加用户</a>
                                 </li>
-                                <li><a href="usermanage.jsp">用户管理</a>
+                                <li><a href="/html/usermanage.jsp">用户管理</a>
                                 </li>
                             </ul>
                         </div>
@@ -88,9 +89,9 @@
                     <div id="dropdown-table" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li><a href="productmanage.jsp">商品管理</a>
+                                <li><a href="/html/productmanage.jsp">商品管理</a>
                                 </li>
-                                <li><a href="addproduct.jsp">添加商品</a>
+                                <li><a href="/html/addproduct.jsp">添加商品</a>
                                 </li>
                             </ul>
                         </div>
@@ -105,7 +106,7 @@
                     <div id="dropdown-form" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li><a href="ordermanage.jsp">订单管理</a>
+                                <li><a href="/html/ordermanage.jsp">订单管理</a>
                                 </li>
                             </ul>
                         </div>
@@ -120,11 +121,11 @@
                     <div id="component-example" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li><a href="adminmanage.jsp">管理员管理</a>
+                                <li><a href="/admin?method=adminList">管理员管理</a>
                                 </li>
-                                <li><a href="addadmin.jsp">添加管理员</a>
+                                <li><a href="/html/addadmin.jsp">添加管理员</a>
                                 </li>
-                                <li><a href="changepass.jsp">修改密码</a>
+                                <li><a href="/html/changepass.jsp">修改密码</a>
                                 </li>
                             </ul>
                         </div>
@@ -141,6 +142,6 @@
     $(function () {
         $(".logout").click(function () {
             window.location.href = "/admin?method=logout";
-        })
-    })
+        });
+    });
 </script>
