@@ -829,7 +829,7 @@
     </collation>
     <table id="209" parent="4" name="address"/>
     <table id="210" parent="4" name="admin"/>
-    <table id="211" parent="4" name="catagory">
+    <table id="211" parent="4" name="category">
       <Comment>类别表</Comment>
     </table>
     <table id="212" parent="4" name="collection">
@@ -910,32 +910,32 @@
       <ColNames>adminname</ColNames>
       <UnderlyingIndexName>admin_adminname_uindex</UnderlyingIndexName>
     </key>
-    <column id="228" parent="211" name="catagoryid">
+    <column id="228" parent="211" name="categoryid">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="229" parent="211" name="catagoryname">
+    <column id="229" parent="211" name="categoryname">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="230" parent="211" name="catagory_catagoryname_uindex">
-      <ColNames>catagoryname</ColNames>
+    <index id="230" parent="211" name="category_categoryname_uindex">
+      <ColNames>categoryname</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
     <key id="231" parent="211" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>catagoryid</ColNames>
+      <ColNames>categoryid</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="232" parent="211" name="catagory_catagoryname_uindex">
-      <ColNames>catagoryname</ColNames>
-      <UnderlyingIndexName>catagory_catagoryname_uindex</UnderlyingIndexName>
+    <key id="232" parent="211" name="category_categoryname_uindex">
+      <ColNames>categoryname</ColNames>
+      <UnderlyingIndexName>category_categoryname_uindex</UnderlyingIndexName>
     </key>
     <column id="233" parent="212" name="clid">
       <Position>1</Position>
@@ -1054,7 +1054,7 @@
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="252" parent="214" name="catagoryid">
+    <column id="252" parent="214" name="categoryid">
       <Position>8</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>

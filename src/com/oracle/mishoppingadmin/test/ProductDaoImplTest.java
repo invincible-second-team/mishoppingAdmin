@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ProductDaoImplTest {
-    ProductDao productDao = new ProductDaoImpl();
+    private ProductDao productDao = new ProductDaoImpl();
 
     @Test
     public void categoryList() throws SQLException {
