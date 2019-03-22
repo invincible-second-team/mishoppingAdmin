@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "ProductController", urlPatterns = "/product")
 public class ProductController extends HttpServlet {
@@ -54,19 +55,18 @@ public class ProductController extends HttpServlet {
     }
 
     protected void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String upload = UploadUtil.upload(request);
 
-        String pimg = request.getParameter("pimg");
+        Map<String, String> upload = UploadUtil.upload(request);
 
         Products products = new Products();
-        products.setPname(request.getParameter("pname"));
-        products.setPdes(request.getParameter("pdes"));
-        products.setPprice(Double.parseDouble(request.getParameter("pprice")));
-        products.setPstate(Long.parseLong(request.getParameter("pstate")));
-        products.setPpricediscount(Double.parseDouble(request.getParameter("pdiscount")));
-        products.setPstock(Long.parseLong(request.getParameter("pstock")));
-        products.setCategoryid(Long.parseLong(request.getParameter("ptype")));
-        products.setPimg(upload);
+        products.setPname(upload.get("pname"));
+        products.setPdes(upload.get("pdesc"));
+        products.setPprice(Double.parseDouble(upload.get("pprice")));
+        products.setPstate(Long.parseLong(upload.get("pstate")));
+        products.setPpricediscount(Double.parseDouble(upload.get("pdiscount")));
+        products.setPstock(Long.parseLong(upload.get("pstock")));
+        products.setCategoryid(Long.parseLong(upload.get("ptype")));
+        products.setPimg(upload.get("filename"));
 
         boolean b = false;
         try {
@@ -75,9 +75,8 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.print(b);
-        writer.flush();
-        writer.close();
+        String notice = b ? "商品添加成功" : "商品添加失败";
+        request.setAttribute("notice", notice);
+        request.getRequestDispatcher("/html/success.jsp").forward(request, response);
     }
 }

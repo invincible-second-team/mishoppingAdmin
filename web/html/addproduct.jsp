@@ -55,13 +55,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="pprice">商品价格</label>
-                                        <input type="number" class="form-control" id="pprice" name="pprice"
+                                        <input type="text" class="form-control" id="pprice" name="pprice"
                                                placeholder="Product Price">
                                         <span class="span" style="font-size: 16px"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="pdiscount">商品折扣</label>
-                                        <input type="number" class="form-control" id="pdiscount" name="pdiscount"
+                                        <input type="text" class="form-control" id="pdiscount" name="pdiscount"
                                                placeholder="Product Discount">
                                         <span class="span" style="font-size: 16px"></span>
                                     </div>
@@ -84,7 +84,8 @@
                                     <div class="form-group">
                                         <label for="ptype">商品类型</label>
                                         <div>
-                                            <select name="ptype" id="ptype" style="width: 15%">
+                                            <select name="ptype" id="ptype" class="form-control" style="width: 15%">
+                                                <option value="0">请选择...</option>
                                             </select>
                                         </div>
                                         <span class="span" style="font-size: 16px"></span>
@@ -144,10 +145,13 @@
                     success: function (data) {
                         if (data !== null) {
                             var json = JSON.parse(data);
-                            console.log(json);
+                            var text = "<option value='0'>请选择...</option>";
+
                             for (var i = 0; i < json.length; i++) {
-                                $("#ptype").append("<option value='" + json[i].categoryid + "'>" + json[i].categoryname + "</option>")
+                                text += "<option value='" + json[i].categoryid + "'>" + json[i].categoryname + "</option>";
                             }
+
+                            $("#ptype").html(text);
                         }
                     },
                     error: function () {
@@ -176,6 +180,27 @@
 
                 $("#pprice").blur(function () {
                     check.checkPrice();
+                });
+
+                $("#pdiscount").blur(function () {
+                    check.checkDiscount();
+                });
+
+                $("#pstock").blur(function () {
+                    check.checkStock();
+                });
+
+                $("#pdesc").blur(function () {
+                    check.checkDesc();
+                });
+
+                $(".submit").click(function (event) {
+                    check.checkType();
+                    if (!check.checkImg() | !check.checkName() | !check.checkPrice() |
+                        !check.checkDiscount() | !check.checkStock() | !check.checkType() |
+                        !check.checkDesc()) {
+                        event.preventDefault();
+                    }
                 })
             });
 
@@ -196,7 +221,7 @@
                         $(".span:first").html("<img src='/img/error.png'>图片格式错误").css("color", "red");
                         return false;
                     } else {
-                        $(".span:first").html("<img src='/img/green.png'>图片格式正确").css("color", "green");
+                        $(".span:first").html("<img src='/img/green.png'>").css("color", "green");
                         return true;
                     }
                 },
@@ -230,27 +255,64 @@
                         $(".span:eq(2)").html("<img src='/img/error.png'>请填写商品价格").css("color", "red");
                         return false;
                     }
-                    if (price <= 0) {
+                    if (price <= 0 || isNaN(price)) {
                         $(".span:eq(2)").html("<img src='/img/error.png'>商品价格错误，请输入大于0的数字").css("color", "red");
                         return false;
-                    }else {
+                    } else {
                         $(".span:eq(2)").html("<img src='/img/green.png'>").css("color", "green");
                         return true;
                     }
                 },
                 checkDiscount: function () {
-                    var priceText = $("#pdiscount").val();
-                    var price = parseFloat(priceText);
+                    var discountText = $("#pdiscount").val();
+                    var discount = parseFloat(discountText);
 
-                    if (priceText === null || priceText === "") {
-                        $(".span:eq(2)").html("<img src='/img/error.png'>请填写折扣").css("color", "red");
+                    if (discountText === null || discountText === "") {
+                        $(".span:eq(3)").html("<img src='/img/error.png'>请填写折扣").css("color", "red");
                         return false;
                     }
-                    if (price <= 0) {
-                        $(".span:eq(2)").html("<img src='/img/error.png'>商品价格错误，请输入大于0的数字").css("color", "red");
+                    if (discount <= 0 || discount > 1 || isNaN(discount)) {
+                        $(".span:eq(3)").html("<img src='/img/error.png'>商品折扣范围在0~1").css("color", "red");
                         return false;
-                    }else {
-                        $(".span:eq(2)").html("<img src='/img/green.png'>").css("color", "green");
+                    } else {
+                        $(".span:eq(3)").html("<img src='/img/green.png'>").css("color", "green");
+                        return true;
+                    }
+                },
+                checkStock: function () {
+                    var stockText = $("#pstock").val();
+                    var stock = parseFloat(stockText);
+
+                    if (stockText === null || stockText === "") {
+                        $(".span:eq(4)").html("<img src='/img/error.png'>请填写商品库存").css("color", "red");
+                        return false;
+                    }
+                    if (stock < 0) {
+                        $(".span:eq(4)").html("<img src='/img/error.png'>请输入不小于0的数字").css("color", "red");
+                        return false;
+                    } else {
+                        $(".span:eq(4)").html("<img src='/img/green.png'>").css("color", "green");
+                        return true;
+                    }
+                },
+                checkDesc: function () {
+                    var pdscText = $("#pdesc").val();
+
+                    if (pdscText === null || pdscText === "") {
+                        $(".span:eq(5)").html("<img src='/img/error.png'>请填写商品描述").css("color", "red");
+                        return false;
+                    } else {
+                        $(".span:eq(5)").html("<img src='/img/green.png'>").css("color", "green");
+                        return true;
+                    }
+                },
+                checkType: function () {
+                    var ptype = parseInt($("#ptype").val());
+
+                    if (ptype < 1) {
+                        $(".span:eq(6)").html("<img src='/img/error.png'>请选择商品类型").css("color", "red");
+                        return false;
+                    } else {
                         return true;
                     }
                 }

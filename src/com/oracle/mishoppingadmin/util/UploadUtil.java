@@ -8,14 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class UploadUtil {
-    public static String upload(HttpServletRequest request) {
+    public static Map<String, String> upload(HttpServletRequest request) {
         String savePath = request.getServletContext().getRealPath("/upload");
         //上传时生成的临时文件保存目录
         String tempPath = request.getServletContext().getRealPath("/temp");
+        Map<String,String> map = new HashMap<>();
         File tmpFile = new File(tempPath);
         File saveFile = new File(savePath);
         if (!tmpFile.exists()) {
@@ -23,7 +26,7 @@ public class UploadUtil {
             tmpFile.mkdir();
         }
 
-        if (!saveFile.exists()){
+        if (!saveFile.exists()) {
             saveFile.mkdir();
         }
 
@@ -62,14 +65,18 @@ public class UploadUtil {
                     //解决普通输入项的数据的中文乱码问题
                     String value = item.getString("UTF-8");
                     //value = new String(value.getBytes("iso8859-1"),"UTF-8");
+                    map.put(name, value);
                     System.out.println(name + "=" + value);
                 } else {//如果fileitem中封装的是上传文件
                     //得到上传的文件名称，
                     String filename = item.getName();
-                    System.out.println(filename);
+
                     if (filename == null || filename.trim().equals("")) {
                         continue;
                     }
+
+                    System.out.println(filename);
+
                     //注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，如：  c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
                     //处理获取到的上传文件的文件名的路径部分，只保留文件名部分
                     filename = filename.substring(filename.lastIndexOf("\\") + 1);
@@ -103,7 +110,8 @@ public class UploadUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return saveFilename;
+        map.put("filename", saveFilename);
+        return map;
     }
 
     /**
