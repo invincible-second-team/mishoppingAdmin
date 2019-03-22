@@ -7,6 +7,7 @@
           <element id="module-output" name="mishoppingAdmin" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="module" name="JUnit4" module-name="mishoppingAdmin" />
           <element id="library" level="project" name="lib" />
         </element>
       </element>

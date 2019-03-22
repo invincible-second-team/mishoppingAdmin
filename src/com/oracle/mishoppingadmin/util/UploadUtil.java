@@ -12,15 +12,19 @@ import java.util.List;
 import java.util.UUID;
 
 public class UploadUtil {
-    private static String upload(HttpServletRequest request) {
-        //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
+    public static String upload(HttpServletRequest request) {
         String savePath = request.getServletContext().getRealPath("/upload");
         //上传时生成的临时文件保存目录
         String tempPath = request.getServletContext().getRealPath("/temp");
         File tmpFile = new File(tempPath);
+        File saveFile = new File(savePath);
         if (!tmpFile.exists()) {
             //创建临时目录
             tmpFile.mkdir();
+        }
+
+        if (!saveFile.exists()){
+            saveFile.mkdir();
         }
 
         String saveFilename = null;
