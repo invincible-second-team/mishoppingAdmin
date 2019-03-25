@@ -31,7 +31,24 @@ public class ProductController extends HttpServlet {
             case "addProduct":
                 addProduct(request, response);
                 break;
-
+            case "productManage":
+                productManage(request, response);
+                break;
+            case "updateProduct":
+                updateProduct(request, response);
+                break;
+            case "deleteProduct":
+                deleteProduct(request, response);
+                break;
+            case "updateProductState":
+                updateProductState(request, response);
+                break;
+            case "updateProductImg":
+                updateProductImg(request, response);
+                break;
+            case "updateProductCategory":
+                updateProductCategory(request, response);
+                break;
         }
     }
 
@@ -54,19 +71,26 @@ public class ProductController extends HttpServlet {
         writer.close();
     }
 
-    protected void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        Map<String, String> upload = UploadUtil.upload(request);
-
+    private Products productsInfo(Map<String, String> map) {
         Products products = new Products();
-        products.setPname(upload.get("pname"));
-        products.setPdes(upload.get("pdesc"));
-        products.setPprice(Double.parseDouble(upload.get("pprice")));
-        products.setPstate(Long.parseLong(upload.get("pstate")));
-        products.setPpricediscount(Double.parseDouble(upload.get("pdiscount")));
-        products.setPstock(Long.parseLong(upload.get("pstock")));
-        products.setCategoryid(Long.parseLong(upload.get("ptype")));
-        products.setPimg(upload.get("filename"));
+        products.setPname(map.get("pname"));
+        products.setPdes(map.get("pdesc"));
+        products.setPprice(Double.parseDouble(map.get("pprice")));
+        products.setPstate(Long.parseLong(map.get("pstate")));
+        products.setPpricediscount(Double.parseDouble(map.get("pdiscount")));
+        products.setPstock(Long.parseLong(map.get("pstock")));
+        products.setCategoryid(Long.parseLong(map.get("ptype")));
+        products.setPimg(map.get("filename"));
+
+        return products;
+    }
+
+    protected void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Map<String, String> upload = UploadUtil.upload(request);
+        Products products = null;
+        if (upload != null) {
+            products = productsInfo(upload);
+        }
 
         boolean b = false;
         try {
@@ -78,5 +102,122 @@ public class ProductController extends HttpServlet {
         String notice = b ? "商品添加成功" : "商品添加失败";
         request.setAttribute("notice", notice);
         request.getRequestDispatcher("/html/success.jsp").forward(request, response);
+    }
+
+    protected void productManage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Map<String, Object>> productInfo = null;
+        try {
+            productInfo = productService.productInfo();
+        } catch (SQLException ignored) {
+        }
+
+        request.setAttribute("productInfo", productInfo);
+        request.getRequestDispatcher("/html/productmanage.jsp").forward(request, response);
+    }
+
+    protected void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pid = request.getParameter("pid");
+        String pname = request.getParameter("pname");
+        String pprice = request.getParameter("pprice");
+        String pstock = request.getParameter("pstock");
+        String pdesc = request.getParameter("pdesc");
+        String pdiscount = request.getParameter("pdiscount");
+
+        Products products = new Products();
+        products.setPname(pname);
+        products.setPid(Long.parseLong(pid));
+        products.setPprice(Double.parseDouble(pprice));
+        products.setPstock(Long.parseLong(pstock));
+        products.setPpricediscount(Double.parseDouble(pdiscount));
+        products.setPdes(pdesc);
+
+        boolean b = false;
+        try {
+            b = productService.updateProduct(products);
+        } catch (SQLException ignored) {
+        }
+
+        PrintWriter writer = response.getWriter();
+        writer.print(b);
+        writer.flush();
+        writer.close();
+    }
+
+    protected void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pid = request.getParameter("pid");
+
+        boolean b = false;
+        try {
+            b = productService.deleteProductById(Long.valueOf(pid));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        PrintWriter writer = response.getWriter();
+        writer.print(b);
+        writer.flush();
+        writer.close();
+    }
+
+    protected void updateProductState(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pid = request.getParameter("pid");
+        String pstate = request.getParameter("pstate");
+
+        Products products = new Products();
+        products.setPid(Long.parseLong(pid));
+        products.setPstate(Long.parseLong(pstate));
+
+        boolean b = false;
+        try {
+            b = productService.updateProductState(products);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        PrintWriter writer = response.getWriter();
+        writer.print(b);
+        writer.flush();
+        writer.close();
+    }
+
+    protected void updateProductImg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Map<String, String> upload = UploadUtil.upload(request);
+
+        Products products = new Products();
+        products.setPid(Long.parseLong(upload.get("pid")));
+        products.setPimg(upload.get("filename"));
+
+        boolean b = false;
+        try {
+            b = productService.updateProductImg(products);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        PrintWriter writer = response.getWriter();
+        writer.print(b);
+        writer.flush();
+        writer.close();
+    }
+
+    protected void updateProductCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pid = request.getParameter("pid");
+        String ptype = request.getParameter("ptype");
+
+        Products products = new Products();
+        products.setPid(Long.parseLong(pid));
+        products.setCategoryid(Long.parseLong(ptype));
+
+        boolean b = false;
+        try {
+            b = productService.updateProductCategory(products);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        PrintWriter writer = response.getWriter();
+        writer.print(b);
+        writer.flush();
+        writer.close();
     }
 }

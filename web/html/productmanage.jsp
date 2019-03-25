@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -27,504 +28,77 @@
 <input type="hidden" value="2">
 <div class="app-container">
     <div class="row content-container">
-        <%@include file="top.jsp"%>
+        <%@include file="top.jsp" %>
         <!-- Main Content -->
         <div class="container-fluid">
             <div class="side-body">
-                <div class="page-title">
-                    <span class="title">Datatable</span>
-                    <div class="description">with jquery Datatable for display data with most usage functional. such as
-                        search, ajax loading, pagination, etc.
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="card">
                             <div class="card-header">
 
                                 <div class="card-title">
-                                    <div class="title">Table</div>
+                                    <div class="title">商品管理</div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <table class="datatable table table-striped" cellspacing="0" width="100%">
                                     <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                    <tr class="tabTr">
+                                        <th>商品图像</th>
+                                        <th>商品名称</th>
+                                        <th>商品价格</th>
+                                        <th>商品折扣</th>
+                                        <th>商品库存</th>
+                                        <th>商品类别</th>
+                                        <th>商品描述</th>
+                                        <th>商品状态</th>
+                                        <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>商品图像</th>
+                                        <th>商品名称</th>
+                                        <th>商品价格</th>
+                                        <th>商品折扣</th>
+                                        <th>商品库存</th>
+                                        <th>商品类别</th>
+                                        <th>商品描述</th>
+                                        <th>商品状态</th>
+                                        <th>操作</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009/01/12</td>
-                                        <td>$86,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2012/03/29</td>
-                                        <td>$433,060</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Airi Satou</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>33</td>
-                                        <td>2008/11/28</td>
-                                        <td>$162,700</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brielle Williamson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>New York</td>
-                                        <td>61</td>
-                                        <td>2012/12/02</td>
-                                        <td>$372,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Herrod Chandler</td>
-                                        <td>Sales Assistant</td>
-                                        <td>San Francisco</td>
-                                        <td>59</td>
-                                        <td>2012/08/06</td>
-                                        <td>$137,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rhona Davidson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>Tokyo</td>
-                                        <td>55</td>
-                                        <td>2010/10/14</td>
-                                        <td>$327,900</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Colleen Hurst</td>
-                                        <td>Javascript Developer</td>
-                                        <td>San Francisco</td>
-                                        <td>39</td>
-                                        <td>2009/09/15</td>
-                                        <td>$205,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sonya Frost</td>
-                                        <td>Software Engineer</td>
-                                        <td>Edinburgh</td>
-                                        <td>23</td>
-                                        <td>2008/12/13</td>
-                                        <td>$103,600</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jena Gaines</td>
-                                        <td>Office Manager</td>
-                                        <td>London</td>
-                                        <td>30</td>
-                                        <td>2008/12/19</td>
-                                        <td>$90,560</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Quinn Flynn</td>
-                                        <td>Support Lead</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2013/03/03</td>
-                                        <td>$342,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Charde Marshall</td>
-                                        <td>Regional Director</td>
-                                        <td>San Francisco</td>
-                                        <td>36</td>
-                                        <td>2008/10/16</td>
-                                        <td>$470,600</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Haley Kennedy</td>
-                                        <td>Senior Marketing Designer</td>
-                                        <td>London</td>
-                                        <td>43</td>
-                                        <td>2012/12/18</td>
-                                        <td>$313,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tatyana Fitzpatrick</td>
-                                        <td>Regional Director</td>
-                                        <td>London</td>
-                                        <td>19</td>
-                                        <td>2010/03/17</td>
-                                        <td>$385,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Michael Silva</td>
-                                        <td>Marketing Designer</td>
-                                        <td>London</td>
-                                        <td>66</td>
-                                        <td>2012/11/27</td>
-                                        <td>$198,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Paul Byrd</td>
-                                        <td>Chief Financial Officer (CFO)</td>
-                                        <td>New York</td>
-                                        <td>64</td>
-                                        <td>2010/06/09</td>
-                                        <td>$725,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gloria Little</td>
-                                        <td>Systems Administrator</td>
-                                        <td>New York</td>
-                                        <td>59</td>
-                                        <td>2009/04/10</td>
-                                        <td>$237,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bradley Greer</td>
-                                        <td>Software Engineer</td>
-                                        <td>London</td>
-                                        <td>41</td>
-                                        <td>2012/10/13</td>
-                                        <td>$132,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dai Rios</td>
-                                        <td>Personnel Lead</td>
-                                        <td>Edinburgh</td>
-                                        <td>35</td>
-                                        <td>2012/09/26</td>
-                                        <td>$217,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jenette Caldwell</td>
-                                        <td>Development Lead</td>
-                                        <td>New York</td>
-                                        <td>30</td>
-                                        <td>2011/09/03</td>
-                                        <td>$345,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Yuri Berry</td>
-                                        <td>Chief Marketing Officer (CMO)</td>
-                                        <td>New York</td>
-                                        <td>40</td>
-                                        <td>2009/06/25</td>
-                                        <td>$675,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Caesar Vance</td>
-                                        <td>Pre-Sales Support</td>
-                                        <td>New York</td>
-                                        <td>21</td>
-                                        <td>2011/12/12</td>
-                                        <td>$106,450</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Doris Wilder</td>
-                                        <td>Sales Assistant</td>
-                                        <td>Sidney</td>
-                                        <td>23</td>
-                                        <td>2010/09/20</td>
-                                        <td>$85,600</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Angelica Ramos</td>
-                                        <td>Chief Executive Officer (CEO)</td>
-                                        <td>London</td>
-                                        <td>47</td>
-                                        <td>2009/10/09</td>
-                                        <td>$1,200,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gavin Joyce</td>
-                                        <td>Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>42</td>
-                                        <td>2010/12/22</td>
-                                        <td>$92,575</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jennifer Chang</td>
-                                        <td>Regional Director</td>
-                                        <td>Singapore</td>
-                                        <td>28</td>
-                                        <td>2010/11/14</td>
-                                        <td>$357,650</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brenden Wagner</td>
-                                        <td>Software Engineer</td>
-                                        <td>San Francisco</td>
-                                        <td>28</td>
-                                        <td>2011/06/07</td>
-                                        <td>$206,850</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fiona Green</td>
-                                        <td>Chief Operating Officer (COO)</td>
-                                        <td>San Francisco</td>
-                                        <td>48</td>
-                                        <td>2010/03/11</td>
-                                        <td>$850,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shou Itou</td>
-                                        <td>Regional Marketing</td>
-                                        <td>Tokyo</td>
-                                        <td>20</td>
-                                        <td>2011/08/14</td>
-                                        <td>$163,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Michelle House</td>
-                                        <td>Integration Specialist</td>
-                                        <td>Sidney</td>
-                                        <td>37</td>
-                                        <td>2011/06/02</td>
-                                        <td>$95,400</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Suki Burks</td>
-                                        <td>Developer</td>
-                                        <td>London</td>
-                                        <td>53</td>
-                                        <td>2009/10/22</td>
-                                        <td>$114,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Prescott Bartlett</td>
-                                        <td>Technical Author</td>
-                                        <td>London</td>
-                                        <td>27</td>
-                                        <td>2011/05/07</td>
-                                        <td>$145,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gavin Cortez</td>
-                                        <td>Team Leader</td>
-                                        <td>San Francisco</td>
-                                        <td>22</td>
-                                        <td>2008/10/26</td>
-                                        <td>$235,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Martena Mccray</td>
-                                        <td>Post-Sales support</td>
-                                        <td>Edinburgh</td>
-                                        <td>46</td>
-                                        <td>2011/03/09</td>
-                                        <td>$324,050</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Unity Butler</td>
-                                        <td>Marketing Designer</td>
-                                        <td>San Francisco</td>
-                                        <td>47</td>
-                                        <td>2009/12/09</td>
-                                        <td>$85,675</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Howard Hatfield</td>
-                                        <td>Office Manager</td>
-                                        <td>San Francisco</td>
-                                        <td>51</td>
-                                        <td>2008/12/16</td>
-                                        <td>$164,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Hope Fuentes</td>
-                                        <td>Secretary</td>
-                                        <td>San Francisco</td>
-                                        <td>41</td>
-                                        <td>2010/02/12</td>
-                                        <td>$109,850</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vivian Harrell</td>
-                                        <td>Financial Controller</td>
-                                        <td>San Francisco</td>
-                                        <td>62</td>
-                                        <td>2009/02/14</td>
-                                        <td>$452,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Timothy Mooney</td>
-                                        <td>Office Manager</td>
-                                        <td>London</td>
-                                        <td>37</td>
-                                        <td>2008/12/11</td>
-                                        <td>$136,200</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jackson Bradshaw</td>
-                                        <td>Director</td>
-                                        <td>New York</td>
-                                        <td>65</td>
-                                        <td>2008/09/26</td>
-                                        <td>$645,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Olivia Liang</td>
-                                        <td>Support Engineer</td>
-                                        <td>Singapore</td>
-                                        <td>64</td>
-                                        <td>2011/02/03</td>
-                                        <td>$234,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bruno Nash</td>
-                                        <td>Software Engineer</td>
-                                        <td>London</td>
-                                        <td>38</td>
-                                        <td>2011/05/03</td>
-                                        <td>$163,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sakura Yamamoto</td>
-                                        <td>Support Engineer</td>
-                                        <td>Tokyo</td>
-                                        <td>37</td>
-                                        <td>2009/08/19</td>
-                                        <td>$139,575</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Thor Walton</td>
-                                        <td>Developer</td>
-                                        <td>New York</td>
-                                        <td>61</td>
-                                        <td>2013/08/11</td>
-                                        <td>$98,540</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Finn Camacho</td>
-                                        <td>Support Engineer</td>
-                                        <td>San Francisco</td>
-                                        <td>47</td>
-                                        <td>2009/07/07</td>
-                                        <td>$87,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Serge Baldwin</td>
-                                        <td>Data Coordinator</td>
-                                        <td>Singapore</td>
-                                        <td>64</td>
-                                        <td>2012/04/09</td>
-                                        <td>$138,575</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Zenaida Frank</td>
-                                        <td>Software Engineer</td>
-                                        <td>New York</td>
-                                        <td>63</td>
-                                        <td>2010/01/04</td>
-                                        <td>$125,250</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Zorita Serrano</td>
-                                        <td>Software Engineer</td>
-                                        <td>San Francisco</td>
-                                        <td>56</td>
-                                        <td>2012/06/01</td>
-                                        <td>$115,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jennifer Acosta</td>
-                                        <td>Junior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>43</td>
-                                        <td>2013/02/01</td>
-                                        <td>$75,650</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cara Stevens</td>
-                                        <td>Sales Assistant</td>
-                                        <td>New York</td>
-                                        <td>46</td>
-                                        <td>2011/12/06</td>
-                                        <td>$145,600</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Hermione Butler</td>
-                                        <td>Regional Director</td>
-                                        <td>London</td>
-                                        <td>47</td>
-                                        <td>2011/03/21</td>
-                                        <td>$356,250</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Lael Greer</td>
-                                        <td>Systems Administrator</td>
-                                        <td>London</td>
-                                        <td>21</td>
-                                        <td>2009/02/27</td>
-                                        <td>$103,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jonas Alexander</td>
-                                        <td>Developer</td>
-                                        <td>San Francisco</td>
-                                        <td>30</td>
-                                        <td>2010/07/14</td>
-                                        <td>$86,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shad Decker</td>
-                                        <td>Regional Director</td>
-                                        <td>Edinburgh</td>
-                                        <td>51</td>
-                                        <td>2008/11/13</td>
-                                        <td>$183,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Michael Bruce</td>
-                                        <td>Javascript Developer</td>
-                                        <td>Singapore</td>
-                                        <td>29</td>
-                                        <td>2011/06/27</td>
-                                        <td>$183,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Donna Snider</td>
-                                        <td>Customer Support</td>
-                                        <td>New York</td>
-                                        <td>27</td>
-                                        <td>2011/01/25</td>
-                                        <td>$112,000</td>
-                                    </tr>
+                                    <c:forEach items="${productInfo}" var="product">
+                                        <tr class="infoId">
+                                            <input type="hidden" value="${product.pid}">
+                                            <td><img src="/upload/${product.pimg}" class="proImg"
+                                                     height="100" width="80"></td>
+                                            <td>${product.pname}</td>
+                                            <td>${product.pprice}</td>
+                                            <td>${product.ppricediscount}</td>
+                                            <td>${product.pstock}</td>
+                                            <td class="cname">${product.categoryname}</td>
+                                            <td>${product.pdes}</td>
+                                            <td>
+                                                <c:if test="${product.pstate==1}">
+                                                    <button class="btn btn-info btn-sm on" disabled>上架</button>
+                                                    <button class="btn btn-danger btn-sm un">下架</button>
+                                                </c:if>
+                                                <c:if test="${product.pstate==0}">
+                                                    <button class="btn btn-info btn-sm on">上架</button>
+                                                    <button class="btn btn-danger btn-sm un" disabled>下架</button>
+                                                </c:if>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-info btn-sm edit" data-toggle="modal"
+                                                        data-target="#myModal">编辑
+                                                </button>
+                                                <button class="btn btn-danger btn-sm delete">删除</button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -534,26 +108,384 @@
             </div>
         </div>
     </div>
-    <%@include file="footer.jsp"%>
-    <div>
-        <!-- Javascript Libs -->
-        <script type="text/javascript" src="/lib/js/jquery.min.js"></script>
-        <script type="text/javascript" src="/lib/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/lib/js/Chart.min.js"></script>
-        <script type="text/javascript" src="/lib/js/bootstrap-switch.min.js"></script>
-
-        <script type="text/javascript" src="/lib/js/jquery.matchHeight-min.js"></script>
-        <script type="text/javascript" src="/lib/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="/lib/js/dataTables.bootstrap.min.js"></script>
-        <script type="text/javascript" src="/lib/js/select2.full.min.js"></script>
-        <script type="text/javascript" src="/lib/js/ace/ace.js"></script>
-        <script type="text/javascript" src="/lib/js/ace/mode-html.js"></script>
-        <script type="text/javascript" src="/lib/js/ace/theme-github.js"></script>
-        <!-- Javascript -->
-        <script type="text/javascript" src="/js/app.js"></script>
-        <script type="text/javascript" src="/js/active.js"></script>
-    </div>
 </div>
+<form method="post" action="#" class="form-horizontal modalform" role="form" id="myForm" onsubmit="return ">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <!--  定义模态框，过渡效果为淡入，id为myModal,tabindex=-1可以禁用使用tab切换，aria-labelledby用于引用模态框的标题，aria-hidden=true保持模态框在触发前窗口不可见  -->
+        <div class="modal-dialog">
+            <!--  显示模态框对话框模型（若不写下一个div则没有颜色）  -->
+            <div class="modal-content">
+                <!--  显示模态框白色背景，所有内容都写在这个div里面  -->
+
+                <div class="btn-info modal-header">
+                    <!--  模态框标题  -->
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <!--  关闭按钮  -->
+                    <h4>修改商品</h4>
+                    <!--  标题内容  -->
+                </div>
+
+                <div class="modal-body">
+                    <!--  模态框内容，我在此处添加一个表单 -->
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="pname" class="col-sm-2 control-label">商品名称</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="pname" name="pname" class="form-control well"/>
+                            </div>
+                            <span class="span col-sm-9 col-sm-offset-2" style="font-size: 16px"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="pprice" class="col-sm-2 control-label">商品价格</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="pprice" name="pprice" class="form-control well"/>
+                            </div>
+                            <span class="span col-sm-9 col-sm-offset-2" style="font-size: 16px"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="pdiscount" class="col-sm-2 control-label">商品折扣</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="pdiscount" name="pdiscount" class="form-control well"/>
+                            </div>
+                            <span class="span col-sm-9 col-sm-offset-2" style="font-size: 16px"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="pstock" class="col-sm-2 control-label">商品库存</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="pstock" name="pstock" class="form-control well"/>
+                            </div>
+                            <span class="span col-sm-9 col-sm-offset-2" style="font-size: 16px"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="pdesc" class="col-sm-2 control-label">商品描述</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" rows="3" id="pdesc" name="pdesc"></textarea>
+                            </div>
+                            <span class="span col-sm-9 col-sm-offset-2" style="font-size: 16px"></span>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <!--  模态框底部样式，一般是提交或者确定按钮 -->
+                    <button type="button" class="btn btn-info submit">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div>
+    </div> <!-- /.modal -->
+</form>
+
+<form method="post" action="#" class="form-horizontal modalImg" role="form" id="myForm" onsubmit="return ">
+    <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <!--  定义模态框，过渡效果为淡入，id为myModal,tabindex=-1可以禁用使用tab切换，aria-labelledby用于引用模态框的标题，aria-hidden=true保持模态框在触发前窗口不可见  -->
+        <div class="modal-dialog">
+            <!--  显示模态框对话框模型（若不写下一个div则没有颜色）  -->
+            <div class="modal-content">
+                <!--  显示模态框白色背景，所有内容都写在这个div里面  -->
+
+                <div class="btn-info modal-header">
+                    <!--  模态框标题  -->
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <!--  关闭按钮  -->
+                    <h4>更新图片</h4>
+                    <!--  标题内容  -->
+                </div>
+
+                <div class="modal-body">
+                    <!--  模态框内容，我在此处添加一个表单 -->
+                    <form class="form-horizontal formImg" enctype="multipart/form-data" role="form">
+                        <div class="form-group">
+                            <input type="hidden" name="imgPid" id="pid">
+                            <label for="pimg" class="col-sm-2 control-label">商品图片</label><br/>
+                            <img src="" alt="商品图片" id="img" hidden height="200" width="160">
+                            <input class="col-sm-offset-2" type="file" id="pimg" name="pimg"
+                                   accept="image/jpeg, image/jpg, image/bmp, image/png">
+                            <span class="spanImg col-sm-9 col-sm-offset-2" style="font-size: 16px"></span>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <!--  模态框底部样式，一般是提交或者确定按钮 -->
+                    <button type="button" class="btn btn-info submit2">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div>
+    </div> <!-- /.modal -->
+</form>
+
+
+<%@include file="footer.jsp" %>
+<!-- Javascript Libs -->
+<script type="text/javascript" src="/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/lib/js/Chart.min.js"></script>
+<script type="text/javascript" src="/lib/js/bootstrap-switch.min.js"></script>
+
+<script type="text/javascript" src="/lib/js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="/lib/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="/lib/js/select2.full.min.js"></script>
+<script type="text/javascript" src="/lib/js/ace/ace.js"></script>
+<script type="text/javascript" src="/lib/js/ace/mode-html.js"></script>
+<script type="text/javascript" src="/lib/js/ace/theme-github.js"></script>
+<!-- Javascript -->
+<script type="text/javascript" src="/js/app.js"></script>
+<script type="text/javascript" src="/js/active.js"></script>
+<script type="text/javascript" src="/js/check1.js"></script>
+
+<script>
+    $(function () {
+        var pid;
+        var typeHtml;
+        var typeVal;
+
+        $.ajax({
+            url: "/product?method=loadType",
+            cache: false,
+            type: "get",
+            success: function (data) {
+                if (data !== null) {
+                    var json = JSON.parse(data);
+                    typeHtml = "";
+
+                    for (var i = 0; i < json.length; i++) {
+                        typeHtml += "<option value='" + json[i].categoryid + "'>" + json[i].categoryname + "</option>";
+                    }
+                }
+            },
+            error: function () {
+                alert("请求失败")
+            }
+        });
+
+
+        $("#pname").blur(function () {
+            check.checkName();
+        });
+
+        $("#pprice").blur(function () {
+            check.checkPrice();
+        });
+
+        $("#pdiscount").blur(function () {
+            check.checkDiscount();
+        });
+
+        $("#pstock").blur(function () {
+            check.checkStock();
+        });
+
+        $("#pdesc").blur(function () {
+            check.checkDesc();
+        });
+
+        $(".edit").click(function () {
+            var index = $(".edit").index($(this));
+
+            var $info = $(".infoId:eq(" + index + ") td");
+            pid = $(".infoId:eq(" + index + ")").find("input").first().val();
+
+            $("#pname").val($info.eq(1).text());
+            $("#pprice").val($info.eq(2).text());
+            $("#pdiscount").val($info.eq(3).text());
+            $("#pstock").val($info.eq(4).text());
+            $("#pdesc").val($info.eq(6).text());
+        });
+
+        $(".delete").click(function () {
+            var index = $(".delete").index($(this));
+            pid = $(".infoId:eq(" + index + ")").find("input").first().val();
+
+            $.ajax({
+                url: "/product?method=deleteProduct",
+                type: "post",
+                cache: false,
+                dataType: "json",
+                data: {
+                    "pid": pid
+                },
+                success: function (data) {
+                    if (data === true) {
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+
+        $(".proImg").dblclick(function () {
+            var index = $(".proImg").index($(this));
+            pid = $(".infoId:eq(" + index + ")").find("input").first().val();
+            $("#imgModal").modal('show');
+
+            $("#pid").val(pid);
+        });
+
+        $("#pimg").change(function () {
+            var checkImg = check.checkImg();
+
+            if (checkImg) {
+                var objUrl = check.getObjectURL(this.files[0]);
+                $("#img").attr("src", objUrl);
+                $("#img").removeAttr("hidden");
+            } else {
+                $("#img").attr("src", "");
+                $("#img").attr("hidden", "hidden");
+            }
+        });
+
+        function doUpload() {
+            var formDate = new FormData();
+            formDate.append("pimg", $("#pimg")[0].files[0]);
+            formDate.append("pid", $("#pid").val());
+            $.ajax({
+                url: "/product?method=updateProductImg",
+                type: "post",
+                dataType: "json",
+                cache: false,
+                data: formDate,
+                processData: false,
+                contentType: false,
+
+                success: function (data) {
+                    if (data === true) {
+                        window.location.reload();
+                    } else {
+                        alert("更新失败");
+                    }
+                }
+            });
+        }
+
+        $(".submit2").click(function () {
+            if (!check.checkImg()) {
+                event.preventDefault();
+            }
+            check.checkImg();
+            doUpload();
+        });
+
+        $(".on").click(function () {
+            var $this = $(this);
+            var index = $(".on").index($this);
+            pid = $(".infoId:eq(" + index + ")").find("input").first().val();
+
+            $.ajax({
+                url: "/product?method=updateProductState",
+                type: "post",
+                cache: false,
+                dataType: "json",
+                data: {
+                    "pid": pid,
+                    "pstate": 1
+                },
+                success: function (data) {
+                    if (data === true) {
+                        $this.attr("disabled", true);
+                        $(".un:eq(" + index + ")").attr("disabled", false);
+                    }
+                }
+            });
+        });
+
+        $(".cname").dblclick(function () {
+            $(this).html("<select class='cselect' style='width: 100%; height: 100%'></select>");
+            $(".cselect").html(typeHtml);
+        });
+
+        $(document).on("change", ".cselect", function () {
+            typeVal = $(this).val();
+        });
+
+        $(document).on("blur", ".cselect", function () {
+            var $this = $(this);
+            var index = $(".cselect").index($this);
+            pid = $(".infoId:eq(" + index + ")").find("input").first().val();
+            var text = $(this).find("option:selected").text();
+            var val = $(this).find("option:selected").val();
+
+            $.ajax({
+                url: "/product?method=updateProductCategory",
+                type: "post",
+                cache: false,
+                dataType: "json",
+                data: {
+                    "pid": pid,
+                    "ptype": val
+                },
+                success: function (data) {
+                    if (data === true) {
+                        $this.parent().html(text);
+                    }
+                }
+            });
+        });
+
+        $(".un").click(function () {
+            var $this = $(this);
+            var index = $(".un").index($this);
+            pid = $(".infoId:eq(" + index + ")").find("input").first().val();
+
+            $.ajax({
+                url: "/product?method=updateProductState",
+                type: "post",
+                cache: false,
+                dataType: "json",
+                data: {
+                    "pid": pid,
+                    "pstate": 0
+                },
+                success: function (data) {
+                    if (data === true) {
+                        $this.attr("disabled", true);
+                        $(".on:eq(" + index + ")").attr("disabled", false);
+                    }
+                }
+            });
+        });
+
+        $(".submit").click(function () {
+            if (!check.checkName() | !check.checkPrice() | check.checkDiscount() |
+                !check.checkStock() | !check.checkDesc()) {
+                event.preventDefault();
+            }
+
+            var pname = $("#pname").val();
+            var pprice = $("#pprice").val();
+            var pdiscount = $("#pdiscount").val();
+            var pstock = $("#pstock").val();
+            var pdesc = $("#pdesc").val();
+
+            var data = {
+                'pid': pid,
+                "pname": pname,
+                "pprice": pprice,
+                "pdiscount": pdiscount,
+                "pstock": pstock,
+                "pdesc": pdesc
+            };
+
+            $.ajax({
+                url: "/product?method=updateProduct",
+                type: "post",
+                cache: false,
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data === true) {
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+    })
+</script>
 </body>
 
 </html>

@@ -89,7 +89,7 @@
                     <div id="dropdown-table" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li><a href="/html/productmanage.jsp">商品管理</a>
+                                <li><a href="/product?method=productManage">商品管理</a>
                                 </li>
                                 <li><a href="/html/addproduct.jsp">添加商品</a>
                                 </li>
@@ -131,7 +131,6 @@
                         </div>
                     </div>
                 </li>
-
             </ul>
         </div>
         <!-- /.navbar-collapse -->
