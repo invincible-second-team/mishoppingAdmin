@@ -286,17 +286,58 @@
             check.checkDesc();
         });
 
+        var $info;
         $(".edit").click(function () {
-            var index = $(".edit").index($(this));
-
-            var $info = $(".infoId:eq(" + index + ") td");
-            pid = $(".infoId:eq(" + index + ")").find("input").first().val();
+            var editIndex = $(".edit").index($(this));
+            $info = $(".infoId:eq(" + editIndex + ") td");
+            pid = $(".infoId:eq(" + editIndex + ")").find("input").first().val();
 
             $("#pname").val($info.eq(1).text());
             $("#pprice").val($info.eq(2).text());
             $("#pdiscount").val($info.eq(3).text());
             $("#pstock").val($info.eq(4).text());
             $("#pdesc").val($info.eq(6).text());
+        });
+
+        $(".submit").click(function () {
+            if (!check.checkName() | !check.checkPrice() | check.checkDiscount() |
+                !check.checkStock() | !check.checkDesc()) {
+                event.preventDefault();
+            }
+
+            var pname = $("#pname").val();
+            var pprice = $("#pprice").val();
+            var pdiscount = $("#pdiscount").val();
+            var pstock = $("#pstock").val();
+            var pdesc = $("#pdesc").val();
+
+            var data = {
+                'pid': pid,
+                "pname": pname,
+                "pprice": pprice,
+                "pdiscount": pdiscount,
+                "pstock": pstock,
+                "pdesc": pdesc
+            };
+
+            $.ajax({
+                url: "/product?method=updateProduct",
+                type: "post",
+                cache: false,
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data === true) {
+                        $info.eq(1).html(pname);
+                        $info.eq(2).html(pprice);
+                        $info.eq(3).html(pdiscount);
+                        $info.eq(4).html(pstock);
+                        $info.eq(6).html(pdesc);
+
+                        $("#myModal").modal('hide');
+                    }
+                }
+            });
         });
 
         $(".delete").click(function () {
@@ -319,12 +360,37 @@
             });
         });
 
+        var index;
         $(".proImg").dblclick(function () {
-            var index = $(".proImg").index($(this));
+            index = $(".proImg").index($(this));
             pid = $(".infoId:eq(" + index + ")").find("input").first().val();
             $("#imgModal").modal('show');
 
             $("#pid").val(pid);
+        });
+
+        $(".submit2").click(function () {
+            if (!check.checkImg()) {
+                event.preventDefault();
+            }
+
+            var formDate = new FormData();
+            formDate.append("pimg", $("#pimg")[0].files[0]);
+            formDate.append("pid", $("#pid").val());
+            $.ajax({
+                url: "/product?method=updateProductImg",
+                type: "post",
+                cache: false,
+                data: formDate,
+                processData: false,
+                contentType: false,
+
+                success: function (data) {
+                    alert(data);
+                    $(".proImg:eq(" + index + ")").attr("src", "/upload/" + data);
+                    $("#imgModal").modal('hide');
+                }
+            });
         });
 
         $("#pimg").change(function () {
@@ -340,36 +406,6 @@
             }
         });
 
-        function doUpload() {
-            var formDate = new FormData();
-            formDate.append("pimg", $("#pimg")[0].files[0]);
-            formDate.append("pid", $("#pid").val());
-            $.ajax({
-                url: "/product?method=updateProductImg",
-                type: "post",
-                dataType: "json",
-                cache: false,
-                data: formDate,
-                processData: false,
-                contentType: false,
-
-                success: function (data) {
-                    if (data === true) {
-                        window.location.reload();
-                    } else {
-                        alert("更新失败");
-                    }
-                }
-            });
-        }
-
-        $(".submit2").click(function () {
-            if (!check.checkImg()) {
-                event.preventDefault();
-            }
-            check.checkImg();
-            doUpload();
-        });
 
         $(".on").click(function () {
             var $this = $(this);
@@ -445,41 +481,6 @@
                     if (data === true) {
                         $this.attr("disabled", true);
                         $(".on:eq(" + index + ")").attr("disabled", false);
-                    }
-                }
-            });
-        });
-
-        $(".submit").click(function () {
-            if (!check.checkName() | !check.checkPrice() | check.checkDiscount() |
-                !check.checkStock() | !check.checkDesc()) {
-                event.preventDefault();
-            }
-
-            var pname = $("#pname").val();
-            var pprice = $("#pprice").val();
-            var pdiscount = $("#pdiscount").val();
-            var pstock = $("#pstock").val();
-            var pdesc = $("#pdesc").val();
-
-            var data = {
-                'pid': pid,
-                "pname": pname,
-                "pprice": pprice,
-                "pdiscount": pdiscount,
-                "pstock": pstock,
-                "pdesc": pdesc
-            };
-
-            $.ajax({
-                url: "/product?method=updateProduct",
-                type: "post",
-                cache: false,
-                dataType: "json",
-                data: data,
-                success: function (data) {
-                    if (data === true) {
-                        window.location.reload();
                     }
                 }
             });

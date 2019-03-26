@@ -194,10 +194,13 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.print(b);
-        writer.flush();
-        writer.close();
+        System.out.println(upload.get("filename"));
+        if (b) {
+            PrintWriter writer = response.getWriter();
+            writer.print(upload.get("filename"));
+            writer.flush();
+            writer.close();
+        }
     }
 
     protected void updateProductCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
