@@ -162,55 +162,47 @@
 
 
                 $("#pimg").change(function () {
-                    var checkImg = check.checkImg();
+                    var checkImg = check.checkImg(this, ".span:first");
 
                     if (checkImg) {
                         var objUrl = check.getObjectURL(this.files[0]);
-                        $("#img").attr("src", objUrl);
-                        $("#img").removeAttr("hidden");
+                        $("#img").attr("src", objUrl).removeAttr("hidden");
                     } else {
-                        $("#img").attr("src", "");
-                        $("#img").attr("hidden", "hidden");
+                        $("#img").attr({"src": "", "hidden": "hidden"});
                     }
                 });
 
 
                 $("#pname").blur(function () {
-                    check.checkName()
+                    check.checkName(this, 1);
                 });
 
                 $("#pprice").blur(function () {
-                    check.checkPrice();
+                    check.checkPrice(this, 2);
                 });
 
                 $("#pdiscount").blur(function () {
-                    check.checkDiscount();
+                    check.checkDiscount(this, 3);
                 });
 
                 $("#pstock").blur(function () {
-                    check.checkStock();
+                    check.checkStock(this, 4);
                 });
 
                 $("#pdesc").blur(function () {
-                    check.checkDesc();
+                    check.checkDesc(this, 5);
                 });
 
                 $(".submit").click(function (event) {
-                    if (!check.checkImg() | !check.checkName() | !check.checkPrice() |
-                        !check.checkDiscount() | !check.checkStock() | !check.checkType() |
-                        !check.checkDesc()) {
+                    if (!check.checkImg("#pimg", ".span:first") | !check.checkName("#pname", 1) | !check.checkPrice("#pprice", 2) |
+                        !check.checkDiscount("#pdiscount", 3) | !check.checkStock("#pstock", 4) | !check.checkType("#ptype", 6) |
+                        !check.checkDesc("#pdesc", 5)) {
                         event.preventDefault();
                     }
                 })
             });
-
-
-        </script>
-        <script>
-
         </script>
     </div>
 </div>
 </body>
-
 </html>

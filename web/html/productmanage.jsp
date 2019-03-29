@@ -238,7 +238,7 @@
 <!-- Javascript -->
 <script type="text/javascript" src="/js/app.js"></script>
 <script type="text/javascript" src="/js/active.js"></script>
-<script type="text/javascript" src="/js/check1.js"></script>
+<script type="text/javascript" src="/js/check.js"></script>
 
 <script>
     $(function () {
@@ -265,25 +265,24 @@
             }
         });
 
-
         $("#pname").blur(function () {
-            check.checkName();
+            check.checkName(this, 0);
         });
 
         $("#pprice").blur(function () {
-            check.checkPrice();
+            check.checkPrice(this, 1);
         });
 
         $("#pdiscount").blur(function () {
-            check.checkDiscount();
+            check.checkDiscount(this, 2);
         });
 
         $("#pstock").blur(function () {
-            check.checkStock();
+            check.checkStock(this, 3);
         });
 
         $("#pdesc").blur(function () {
-            check.checkDesc();
+            check.checkDesc(this, 4);
         });
 
         var $info;
@@ -300,8 +299,8 @@
         });
 
         $(".submit").click(function () {
-            if (!check.checkName() | !check.checkPrice() | check.checkDiscount() |
-                !check.checkStock() | !check.checkDesc()) {
+            if (!check.checkName("#pname", 0) | !check.checkPrice("#pprice", 1) | check.checkDiscount("#pdiscount", 2) |
+                !check.checkStock("#pstock", 3) | !check.checkDesc("#pdesc", 4)) {
                 event.preventDefault();
             }
 
@@ -370,7 +369,7 @@
         });
 
         $(".submit2").click(function () {
-            if (!check.checkImg()) {
+            if (!check.checkImg("#pimg", ".spanImg")) {
                 event.preventDefault();
             }
 
@@ -386,7 +385,6 @@
                 contentType: false,
 
                 success: function (data) {
-                    alert(data);
                     $(".proImg:eq(" + index + ")").attr("src", "/upload/" + data);
                     $("#imgModal").modal('hide');
                 }
@@ -394,15 +392,13 @@
         });
 
         $("#pimg").change(function () {
-            var checkImg = check.checkImg();
+            var checkImg = check.checkImg(this, ".spanImg");
 
             if (checkImg) {
                 var objUrl = check.getObjectURL(this.files[0]);
-                $("#img").attr("src", objUrl);
-                $("#img").removeAttr("hidden");
+                $("#img").attr("src", objUrl).removeAttr("hidden");
             } else {
-                $("#img").attr("src", "");
-                $("#img").attr("hidden", "hidden");
+                $("#img").attr({src: "", "hidden": "hidden"});
             }
         });
 
