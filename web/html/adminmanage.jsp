@@ -33,7 +33,7 @@
         <div class="container-fluid">
             <div class="side-body">
                 <div class="row">
-                    <div class="col-xs-offset-3 col-xs-6">
+                    <div class="">
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
