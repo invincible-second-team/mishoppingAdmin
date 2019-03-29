@@ -138,6 +138,9 @@
         <script type="text/javascript" src="/js/check.js"></script>
 
         <script>
+            /**
+             * 使用ajax向后台获取类型数据
+             */
             $(function () {
                 $.ajax({
                     url: "/product?method=loadType",
@@ -161,6 +164,9 @@
                 });
 
 
+                /**
+                 * 图片修改时验证
+                 */
                 $("#pimg").change(function () {
                     var checkImg = check.checkImg(this, ".span:first");
 
@@ -172,27 +178,44 @@
                     }
                 });
 
-
+                /**
+                 * 焦点失去时验证名称
+                 */
                 $("#pname").blur(function () {
                     check.checkName(this, 1);
                 });
 
+                /**
+                 * 焦点失去时验证价格
+                 */
                 $("#pprice").blur(function () {
                     check.checkPrice(this, 2);
                 });
 
+                /**
+                 * 焦点失去时验证折扣
+                 */
                 $("#pdiscount").blur(function () {
                     check.checkDiscount(this, 3);
                 });
 
+                /**
+                 * 焦点失去时验证库存
+                 */
                 $("#pstock").blur(function () {
                     check.checkStock(this, 4);
                 });
 
+                /**
+                 * 焦点失去时验证描述
+                 */
                 $("#pdesc").blur(function () {
                     check.checkDesc(this, 5);
                 });
 
+                /**
+                 * 添加商品提交数据时验证
+                 */
                 $(".submit").click(function (event) {
                     if (!check.checkImg("#pimg", ".span:first") | !check.checkName("#pname", 1) | !check.checkPrice("#pprice", 2) |
                         !check.checkDiscount("#pdiscount", 3) | !check.checkStock("#pstock", 4) | !check.checkType("#ptype", 6) |

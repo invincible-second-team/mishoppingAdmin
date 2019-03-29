@@ -88,18 +88,30 @@
         <script type="text/javascript" src="/js/active.js"></script>
 
         <script>
+            /**
+             * 焦点失去时验证账号
+             */
             $("#adminname").blur(function () {
                checkAccount();
             });
 
+            /**
+             * 焦点失去时验证密码
+             */
             $("#adminpassword").blur(function () {
                 checkPassword();
             });
 
+            /**
+             * 焦点失去时验证重复密码
+             */
             $("#adminpassword2").blur(function () {
                 checkPassword2();
             });
 
+            /**
+             * 使用ajax向后台发送数据
+             */
             $(".submit").click(function () {
                 var spanText = $(".span:first").text();
 
@@ -127,6 +139,10 @@
                 })
             });
 
+            /**
+             * 验证账号（长度在5-16之间，以字母下划线开头）
+             * 并向后台验证账号是否存在在数据库中
+             */
             function checkAccount() {
                 var adminname = $("#adminname").val();
                 var reg = /^[A-z_][\w_-]{4,15}$/;
@@ -139,6 +155,7 @@
                     $(".span:first").html("<img src='/img/error.png'>账号必须以字母下划线开头，5-16为字符").css("color", "red");
                     return;
                 }
+
                 $.ajax({
                     url: "/admin?method=checkAdminName",
                     cache: false,
@@ -156,6 +173,11 @@
                     }
                 });
             }
+
+            /**
+             * 验证密码（长度为6-18位字符）
+             * @returns {boolean}
+             */
             function checkPassword() {
                 var adminpassword = $("#adminpassword").val();
 
@@ -171,6 +193,11 @@
                     return true;
                 }
             }
+
+            /**
+             * 验证重复密码是否与密码重复
+             * @returns {boolean}
+             */
             function checkPassword2() {
                 var adminpassword = $("#adminpassword").val();
                 var adminpassword2 = $("#adminpassword2").val();

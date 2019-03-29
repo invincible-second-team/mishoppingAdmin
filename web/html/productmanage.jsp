@@ -246,6 +246,9 @@
         var typeHtml;
         var typeVal;
 
+        /**
+         * 使用ajax获取类型数据
+         */
         $.ajax({
             url: "/product?method=loadType",
             cache: false,
@@ -265,27 +268,45 @@
             }
         });
 
+        /**
+         * 焦点失去时验证名称
+         */
         $("#pname").blur(function () {
             check.checkName(this, 0);
         });
 
+        /**
+         * 焦点失去时验证价格
+         */
         $("#pprice").blur(function () {
             check.checkPrice(this, 1);
         });
 
+        /**
+         * 焦点失去时验证折扣
+         */
         $("#pdiscount").blur(function () {
             check.checkDiscount(this, 2);
         });
 
+        /**
+         * 焦点失去时验证库存
+         */
         $("#pstock").blur(function () {
             check.checkStock(this, 3);
         });
 
+        /**
+         * 焦点失去时验证描述
+         */
         $("#pdesc").blur(function () {
             check.checkDesc(this, 4);
         });
 
         var $info;
+        /**
+         * 点击编辑时，将数据回显到表单上
+         */
         $(".edit").click(function () {
             var editIndex = $(".edit").index($(this));
             $info = $(".infoId:eq(" + editIndex + ") td");
@@ -298,6 +319,9 @@
             $("#pdesc").val($info.eq(6).text());
         });
 
+        /**
+         * 提交表单并验证
+         */
         $(".submit").click(function () {
             if (!check.checkName("#pname", 0) | !check.checkPrice("#pprice", 1) | check.checkDiscount("#pdiscount", 2) |
                 !check.checkStock("#pstock", 3) | !check.checkDesc("#pdesc", 4)) {
@@ -339,6 +363,9 @@
             });
         });
 
+        /**
+         * 删除商品
+         */
         $(".delete").click(function () {
             var index = $(".delete").index($(this));
             pid = $(".infoId:eq(" + index + ")").find("input").first().val();
@@ -360,6 +387,9 @@
         });
 
         var index;
+        /**
+         * 双击图片修改图片信息
+         */
         $(".proImg").dblclick(function () {
             index = $(".proImg").index($(this));
             pid = $(".infoId:eq(" + index + ")").find("input").first().val();
@@ -368,6 +398,9 @@
             $("#pid").val(pid);
         });
 
+        /**
+         * 提交图片信息，使用ajax上传图片
+         */
         $(".submit2").click(function () {
             if (!check.checkImg("#pimg", ".spanImg")) {
                 event.preventDefault();
@@ -391,6 +424,9 @@
             });
         });
 
+        /**
+         * 图片修改时验证，若图片选中则显示图片
+         */
         $("#pimg").change(function () {
             var checkImg = check.checkImg(this, ".spanImg");
 
@@ -402,7 +438,9 @@
             }
         });
 
-
+        /**
+         * 修改商品状态为上架
+         */
         $(".on").click(function () {
             var $this = $(this);
             var index = $(".on").index($this);
@@ -426,15 +464,50 @@
             });
         });
 
-        $(".cname").dblclick(function () {
-            $(this).html("<select class='cselect' style='width: 100%; height: 100%'></select>");
-            $(".cselect").html(typeHtml);
+        /**
+         * 修改商品状态为下架
+         */
+        $(".un").click(function () {
+            var $this = $(this);
+            var index = $(".un").index($this);
+            pid = $(".infoId:eq(" + index + ")").find("input").first().val();
+
+            $.ajax({
+                url: "/product?method=updateProductState",
+                type: "post",
+                cache: false,
+                dataType: "json",
+                data: {
+                    "pid": pid,
+                    "pstate": 0
+                },
+                success: function (data) {
+                    if (data === true) {
+                        $this.attr("disabled", true);
+                        $(".on:eq(" + index + ")").attr("disabled", false);
+                    }
+                }
+            });
         });
 
+        /**
+         * 双击类别名称修改类别
+         */
+        $(".cname").dblclick(function () {
+            $(this).html("<select class='cselect' style='width: 100%; height: 100%'></select>");
+            $(".cselect").html(typeHtml).focus();
+        });
+
+        /**
+         * 当类别改变时获取类型的值
+         */
         $(document).on("change", ".cselect", function () {
             typeVal = $(this).val();
         });
 
+        /**
+         * 失去焦点时向后台发送请求修改商品的类别
+         */
         $(document).on("blur", ".cselect", function () {
             var $this = $(this);
             var index = $(".cselect").index($this);
@@ -454,29 +527,6 @@
                 success: function (data) {
                     if (data === true) {
                         $this.parent().html(text);
-                    }
-                }
-            });
-        });
-
-        $(".un").click(function () {
-            var $this = $(this);
-            var index = $(".un").index($this);
-            pid = $(".infoId:eq(" + index + ")").find("input").first().val();
-
-            $.ajax({
-                url: "/product?method=updateProductState",
-                type: "post",
-                cache: false,
-                dataType: "json",
-                data: {
-                    "pid": pid,
-                    "pstate": 0
-                },
-                success: function (data) {
-                    if (data === true) {
-                        $this.attr("disabled", true);
-                        $(".on:eq(" + index + ")").attr("disabled", false);
                     }
                 }
             });

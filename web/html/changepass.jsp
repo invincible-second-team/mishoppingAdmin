@@ -88,18 +88,30 @@
 
         <script>
             $(function () {
+                /**
+                 * 焦点失去时验证原始密码
+                 */
                 $("#password1").blur(function () {
                     checkOldPassword();
                 });
 
+                /**
+                 * 焦点失去时验证新密码
+                 */
                 $("#password2").blur(function () {
                     checkNewPassword();
                 });
 
+                /**
+                 * 焦点失去时验证重复密码
+                 */
                 $("#password3").blur(function () {
                     checkNewPassword2();
                 });
 
+                /**
+                 * 提交时验证并向后台发送请求
+                 */
                 $(".submit").click(function () {
                     if ($(".span:first").text() !== "密码正确" || !checkNewPassword() || !checkNewPassword2()) {
                         return;
@@ -128,6 +140,9 @@
                 })
             });
 
+            /**
+             * 验证原始密码
+             */
             function checkOldPassword() {
                 var password = $("#password1").val();
 
@@ -157,6 +172,9 @@
                 });
             }
 
+            /**
+             * 验证新密码
+             */
             function checkNewPassword() {
                 var adminpassword = $("#password2").val();
 
@@ -173,6 +191,9 @@
                 }
             }
 
+            /**
+             * 验证重复密码
+             */
             function checkNewPassword2() {
                 var adminpassword = $("#password2").val();
                 var adminpassword2 = $("#password3").val();

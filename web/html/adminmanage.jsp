@@ -95,6 +95,9 @@
         <script type="text/javascript" src="/js/active.js"></script>
         <script>
             $(function () {
+                /**
+                 * 重置密码为666666
+                 */
                 $(".reset").click(function () {
 
                     var val = $(this).parent().prev().text();
@@ -120,10 +123,11 @@
                         }
                     });
                 });
-            });
-            $(function () {
-                $(".delete").click(function () {
 
+                /**
+                 * 删除管理员
+                 */
+                $(".delete").click(function () {
                     var val = $(this).parent().prev().text();
 
                     $.ajax({
@@ -147,7 +151,7 @@
                         }
                     });
                 });
-            })
+            });
         </script>
     </div>
 </div>
