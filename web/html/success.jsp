@@ -40,6 +40,9 @@
                             </div>
                             <div class="card-body">
                                 <span style="font-size: 20px; font-weight: bold;">${notice}</span>
+                                <div>
+                                    <button type="button" class="btn btn-info returnBefore">返回上一页</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,6 +68,14 @@
         <!-- Javascript -->
         <script type="text/javascript" src="/js/app.js"></script>
         <script type="text/javascript" src="/js/active.js"></script>
+        <script type="text/javascript">
+            /**
+             * 点击返回上一页时返回添加商品界面
+             */
+            $(document).on("click", ".returnBefore", function () {
+                window.location.href = "/html/addproduct.jsp";
+            });
+        </script>
     </div>
 </div>
 </body>

@@ -130,13 +130,23 @@
                         "adminpassword": adminpassword
                     },
                     success: function (data) {
+                        var span;
                         if (data === true) {
-                            $(".form-div").html("<span style='font-size: 20px; font-weight: bold;'>添加成功</span>");
+                            span = "<span style='font-size: 20px; font-weight: bold;'>添加成功</span>";
                         } else {
-                            $(".form-div").html("<span style='font-size: 20px; font-weight: bold;'>添加失败</span>");
+                            span = "<span style='font-size: 20px; font-weight: bold;'>添加失败</span>";
                         }
+                        span += '<div><button type="button" class="btn btn-info returnBefore">返回上一页</button></div>';
+                        $(".form-div").html(span);
                     }
                 })
+            });
+
+            /**
+             * 返回上一页时重新加载本页面
+             */
+            $(document).on("click", ".returnBefore", function () {
+                window.location.reload();
             });
 
             /**

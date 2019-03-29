@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -36,7 +37,6 @@
                     <div class="col-xs-12">
                         <div class="card">
                             <div class="card-header">
-
                                 <div class="card-title">
                                     <div class="title">商品管理</div>
                                 </div>
@@ -51,7 +51,7 @@
                                         <th>商品折扣</th>
                                         <th>商品库存</th>
                                         <th>商品类别</th>
-                                        <th>商品描述</th>
+                                        <th width="30%">商品描述</th>
                                         <th>商品状态</th>
                                         <th>操作</th>
                                     </tr>

@@ -44,7 +44,7 @@
                                 <table class="datatable table table-striped" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th width="60%">管理员账号</th>
+                                        <th width="80%">管理员账号</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -112,16 +112,26 @@
                         },
 
                         success: function (data) {
+                            var span;
                             if (data === true) {
-                                $(".card-body").html("<span style='font-size: 20px; font-weight: bold;'>密码重置成功，重置密码为666666</span>");
+                                span = "<span style='font-size: 20px; font-weight: bold;'>密码重置成功，重置密码为666666</span>";
                             } else {
-                                $(".card-body").html("<span style='font-size: 20px; font-weight: bold;'>密码重置失败</span>");
+                                span = "<span style='font-size: 20px; font-weight: bold;'>密码重置失败</span>";
                             }
+                            span += '<div><button type="button" class="btn btn-info returnBefore">返回上一页</button></div>';
+                            $(".card-body").html(span);
                         },
                         error: function () {
                             alert("test");
                         }
                     });
+                });
+
+                /**
+                 * 返回上一页时重新加载本页面
+                 */
+                $(document).on("click", ".returnBefore", function () {
+                    window.location.reload();
                 });
 
                 /**
