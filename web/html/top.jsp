@@ -14,6 +14,7 @@
             </button>
             <ol class="breadcrumb navbar-breadcrumb">
                 <li class="active">mishoppingAdmin</li>
+                <li class="active time"></li>
             </ol>
             <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                 <i class="fa fa-th icon"></i>
@@ -61,7 +62,7 @@
 
             <ul class="nav navbar-nav">
                 <li class="li">
-                    <a href="index.jsp">
+                    <a href="/html/index.jsp">
                         <span class="icon fa fa-tachometer"></span><span class="title">欢迎界面</span>
                     </a>
                 </li>
@@ -142,5 +143,27 @@
         $(".logout").click(function () {
             window.location.href = "/admin?method=logout";
         });
+        date();
     });
+    setInterval(function () {
+        date();
+    }, 500);
+
+    //js 获取当前时间
+    function date() {
+        var date = new Date();
+        var year = date.getFullYear();//当前年份
+        var month = date.getMonth();//当前月份
+        var data = date.getDate();//天
+        var hours = date.getHours();//小时
+        var minute = date.getMinutes();//分
+        var second = date.getSeconds();//秒
+        var time = year + "-" + checkNum((month + 1)) + "-" + checkNum(data) + " " + checkNum(hours) + ":" + checkNum(minute) + ":" + checkNum(second);
+        $(".time").text("当前时间：" + time)
+    }
+
+    //补位 当某个字段不是两位数时补0
+    function checkNum(str) {
+        return str >= 10 ? str : "0" + str;
+    }
 </script>
