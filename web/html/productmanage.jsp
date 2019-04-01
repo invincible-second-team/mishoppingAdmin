@@ -12,17 +12,17 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
     <!-- CSS Libs -->
-    <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/lib/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/lib/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap-switch.min.css">
-    <link rel="stylesheet" type="text/css" href="/lib/css/checkbox3.min.css">
-    <link rel="stylesheet" type="text/css" href="/lib/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="/lib/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/lib/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/checkbox3.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/select2.min.css">
     <!-- CSS App -->
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/css/themes/flat-blue.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/themes/flat-blue.css">
 </head>
 
 <body class="flat-blue">
@@ -73,7 +73,7 @@
                                     <c:forEach items="${productInfo}" var="product">
                                         <tr class="infoId">
                                             <input type="hidden" value="${product.pid}">
-                                            <td><img src="/upload/${product.pimg}" class="proImg"
+                                            <td><img src="${pageContext.request.contextPath}/upload/${product.pimg}" class="proImg"
                                                      height="100" width="80"></td>
                                             <td>${product.pname}</td>
                                             <td>${product.pprice}</td>
@@ -223,22 +223,22 @@
 
 <%@include file="footer.jsp" %>
 <!-- Javascript Libs -->
-<script type="text/javascript" src="/lib/js/jquery.min.js"></script>
-<script type="text/javascript" src="/lib/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/lib/js/Chart.min.js"></script>
-<script type="text/javascript" src="/lib/js/bootstrap-switch.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/Chart.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/bootstrap-switch.min.js"></script>
 
-<script type="text/javascript" src="/lib/js/jquery.matchHeight-min.js"></script>
-<script type="text/javascript" src="/lib/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="/lib/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="/lib/js/select2.full.min.js"></script>
-<script type="text/javascript" src="/lib/js/ace/ace.js"></script>
-<script type="text/javascript" src="/lib/js/ace/mode-html.js"></script>
-<script type="text/javascript" src="/lib/js/ace/theme-github.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/select2.full.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/ace/ace.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/ace/mode-html.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/ace/theme-github.js"></script>
 <!-- Javascript -->
-<script type="text/javascript" src="/js/app.js"></script>
-<script type="text/javascript" src="/js/active.js"></script>
-<script type="text/javascript" src="/js/check.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/active.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/check.js"></script>
 
 <script>
     $(function () {
@@ -250,7 +250,7 @@
          * 使用ajax获取类型数据
          */
         $.ajax({
-            url: "/product?method=loadType",
+            url: "${pageContext.request.contextPath}/product?method=loadType",
             cache: false,
             type: "get",
             success: function (data) {
@@ -344,7 +344,7 @@
             };
 
             $.ajax({
-                url: "/product?method=updateProduct",
+                url: "${pageContext.request.contextPath}/product?method=updateProduct",
                 type: "post",
                 cache: false,
                 dataType: "json",
@@ -371,7 +371,7 @@
             pid = $(".infoId:eq(" + index + ")").find("input").first().val();
 
             $.ajax({
-                url: "/product?method=deleteProduct",
+                url: "${pageContext.request.contextPath}/product?method=deleteProduct",
                 type: "post",
                 cache: false,
                 dataType: "json",
@@ -410,7 +410,7 @@
             formDate.append("pimg", $("#pimg")[0].files[0]);
             formDate.append("pid", $("#pid").val());
             $.ajax({
-                url: "/product?method=updateProductImg",
+                url: "${pageContext.request.contextPath}/product?method=updateProductImg",
                 type: "post",
                 cache: false,
                 data: formDate,
@@ -418,7 +418,7 @@
                 contentType: false,
 
                 success: function (data) {
-                    $(".proImg:eq(" + index + ")").attr("src", "/upload/" + data);
+                    $(".proImg:eq(" + index + ")").attr("src", "${pageContext.request.contextPath}/upload/" + data);
                     $("#imgModal").modal('hide');
                 }
             });
@@ -447,7 +447,7 @@
             pid = $(".infoId:eq(" + index + ")").find("input").first().val();
 
             $.ajax({
-                url: "/product?method=updateProductState",
+                url: "${pageContext.request.contextPath}/product?method=updateProductState",
                 type: "post",
                 cache: false,
                 dataType: "json",
@@ -473,7 +473,7 @@
             pid = $(".infoId:eq(" + index + ")").find("input").first().val();
 
             $.ajax({
-                url: "/product?method=updateProductState",
+                url: "${pageContext.request.contextPath}/product?method=updateProductState",
                 type: "post",
                 cache: false,
                 dataType: "json",
@@ -516,7 +516,7 @@
             var val = $(this).find("option:selected").val();
 
             $.ajax({
-                url: "/product?method=updateProductCategory",
+                url: "${pageContext.request.contextPath}/product?method=updateProductCategory",
                 type: "post",
                 cache: false,
                 dataType: "json",

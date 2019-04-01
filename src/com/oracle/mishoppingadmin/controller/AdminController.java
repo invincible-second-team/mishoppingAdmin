@@ -84,7 +84,7 @@ public class AdminController extends HttpServlet {
 
     protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().invalidate();
-        response.sendRedirect("/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
 
     protected void checkAdminName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

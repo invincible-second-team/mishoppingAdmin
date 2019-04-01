@@ -48,7 +48,7 @@
             }
             flag = true;
             $.ajax({
-                url: "/admin?method=login",
+                url: "${pageContext.request.contextPath}/admin?method=login",
                 type: "post",
                 data: {
                     "adminname": adminname,
@@ -59,7 +59,7 @@
                 success: function (data) {
                     flag = false;
                     if (data === true) {
-                        location.href = "/html/index.jsp";
+                        location.href = "${pageContext.request.contextPath}/html/index.jsp";
                     } else {
                         $(".notice").text("账号或密码错误");
                     }

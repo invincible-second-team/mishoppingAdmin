@@ -101,7 +101,7 @@ public class ProductController extends HttpServlet {
 
         String notice = b ? "商品添加成功" : "商品添加失败";
         request.setAttribute("notice", notice);
-        request.getRequestDispatcher("/html/success.jsp").forward(request, response);
+        request.getRequestDispatcher("html/success.jsp").forward(request, response);
     }
 
     protected void productManage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -112,7 +112,7 @@ public class ProductController extends HttpServlet {
         }
 
         request.setAttribute("productInfo", productInfo);
-        request.getRequestDispatcher("/html/productmanage.jsp").forward(request, response);
+        request.getRequestDispatcher( "html/productmanage.jsp").forward(request, response);
     }
 
     protected void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

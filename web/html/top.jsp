@@ -62,7 +62,7 @@
 
             <ul class="nav navbar-nav">
                 <li class="li">
-                    <a href="/html/index.jsp">
+                    <a href="${pageContext.request.contextPath}/html/index.jsp">
                         <span class="icon fa fa-tachometer"></span><span class="title">欢迎界面</span>
                     </a>
                 </li>
@@ -74,9 +74,9 @@
                     <div id="dropdown-element" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li><a href="/html/adduser.jsp">添加用户</a>
+                                <li><a href="${pageContext.request.contextPath}/html/adduser.jsp">添加用户</a>
                                 </li>
-                                <li><a href="/html/usermanage.jsp">用户管理</a>
+                                <li><a href="${pageContext.request.contextPath}/html/usermanage.jsp">用户管理</a>
                                 </li>
                             </ul>
                         </div>
@@ -90,9 +90,9 @@
                     <div id="dropdown-table" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li><a href="/product?method=productManage">商品管理</a>
+                                <li><a href="${pageContext.request.contextPath}/product?method=productManage">商品管理</a>
                                 </li>
-                                <li><a href="/html/addproduct.jsp">添加商品</a>
+                                <li><a href="${pageContext.request.contextPath}/html/addproduct.jsp">添加商品</a>
                                 </li>
                             </ul>
                         </div>
@@ -107,7 +107,7 @@
                     <div id="dropdown-form" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li><a href="/html/ordermanage.jsp">订单管理</a>
+                                <li><a href="${pageContext.request.contextPath}/html/ordermanage.jsp">订单管理</a>
                                 </li>
                             </ul>
                         </div>
@@ -122,11 +122,11 @@
                     <div id="component-example" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li><a href="/admin?method=adminList">管理员管理</a>
+                                <li><a href="${pageContext.request.contextPath}/admin?method=adminList">管理员管理</a>
                                 </li>
-                                <li><a href="/html/addadmin.jsp">添加管理员</a>
+                                <li><a href="${pageContext.request.contextPath}/html/addadmin.jsp">添加管理员</a>
                                 </li>
-                                <li><a href="/html/changepass.jsp">修改密码</a>
+                                <li><a href="${pageContext.request.contextPath}/html/changepass.jsp">修改密码</a>
                                 </li>
                             </ul>
                         </div>
@@ -137,11 +137,11 @@
         <!-- /.navbar-collapse -->
     </nav>
 </div>
-<script src="/lib/js/jquery-3.3.1.js"></script>
+<script src="${pageContext.request.contextPath}/lib/js/jquery-3.3.1.js"></script>
 <script>
     $(function () {
         $(".logout").click(function () {
-            window.location.href = "/admin?method=logout";
+            window.location.href = "${pageContext.request.contextPath}/admin?method=logout";
         });
         date();
     });
