@@ -4,6 +4,8 @@ import com.oracle.mishoppingadmin.bean.Category;
 import com.oracle.mishoppingadmin.bean.Products;
 import com.oracle.mishoppingadmin.dao.ProductDao;
 import com.oracle.mishoppingadmin.dao.impl.ProductDaoImpl;
+import com.oracle.mishoppingadmin.util.ChineseUtils;
+import com.oracle.mishoppingadmin.util.RandomValueUtil;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -20,17 +22,21 @@ public class ProductDaoImplTest {
 
     @Test
     public void addProduct() throws SQLException {
-        Products products = new Products();
-        products.setPimg("123");
-        products.setPstock(12);
-        products.setPpricediscount(0.75);
-        products.setPprice(30);
-        products.setPdes("4564");
-        products.setPstate(1);
-        products.setCategoryid(2);
-        products.setPname("小米6");
-        boolean b = productDao.addProduct(products);
-        System.out.println(b);
+        for (int i = 0; i < 50; i++) {
+            Products products = new Products();
+            products.setPimg("computer" + RandomValueUtil.getNum(1, 13) + ".jpg");
+            products.setPstock(RandomValueUtil.getNum(200, 300));
+
+            double discount = RandomValueUtil.getDouble(0.2, 1);
+            products.setPpricediscount(discount < 0.5 ? 1 : discount);
+            products.setPprice(RandomValueUtil.getNum(4000, 8000));
+            products.setPdes(ChineseUtils.getRandomLengthChiness(20, 50));
+            products.setPstate(RandomValueUtil.getNum(0, 1));
+            products.setCategoryid(3);
+            products.setPname("小米电脑" + i);
+            boolean b = productDao.addProduct(products);
+            System.out.println(b);
+        }
     }
 
     @Test

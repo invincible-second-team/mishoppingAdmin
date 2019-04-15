@@ -37,11 +37,18 @@ public class AdminDaoImplTest {
 
     @Test
     public void addAdmin() throws SQLException {
-        Admin admin = new Admin();
-        admin.setAdminname("admin");
-        admin.setAdminpassword("123");
-        boolean b = adminDao.addAdmin(admin);
-        System.out.println(b);
+
+        for (int i = 0; i < 55; i++) {
+            Admin admin = new Admin();
+            if (i != 0)
+                admin.setAdminname("admin" + i);
+            else
+                admin.setAdminname("admin");
+            admin.setAdminpassword("123456");
+            boolean b = adminDao.addAdmin(admin);
+            System.out.println(b);
+        }
+
     }
 
     @Test
