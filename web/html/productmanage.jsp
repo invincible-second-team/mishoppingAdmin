@@ -12,17 +12,17 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
     <!-- CSS Libs -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/bootstrap-switch.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/checkbox3.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/checkbox3.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/select2.min.css">
     <!-- CSS App -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/themes/flat-blue.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/flat-blue.css">
 </head>
 
 <body class="flat-blue">
@@ -73,7 +73,8 @@
                                     <c:forEach items="${productInfo}" var="product">
                                         <tr class="infoId">
                                             <input type="hidden" value="${product.pid}">
-                                            <td><img src="${pageContext.request.contextPath}/upload/${product.pimg}" class="proImg"
+                                            <td><img src="upload/${product.pimg}"
+                                                     class="proImg"
                                                      height="100" width="80"></td>
                                             <td>${product.pname}</td>
                                             <td>${product.pprice}</td>
@@ -223,22 +224,21 @@
 
 <%@include file="footer.jsp" %>
 <!-- Javascript Libs -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/Chart.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/bootstrap-switch.min.js"></script>
+<script type="text/javascript" src="lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/js/Chart.min.js"></script>
+<script type="text/javascript" src="lib/js/bootstrap-switch.min.js"></script>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.matchHeight-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/select2.full.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/ace/ace.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/ace/mode-html.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/ace/theme-github.js"></script>
+<script type="text/javascript" src="lib/js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="lib/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/js/select2.full.min.js"></script>
+<script type="text/javascript" src="lib/js/ace/ace.js"></script>
+<script type="text/javascript" src="lib/js/ace/mode-html.js"></script>
+<script type="text/javascript" src="lib/js/ace/theme-github.js"></script>
 <!-- Javascript -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/app.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/active.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/check.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/check.js"></script>
 
 <script>
     $(function () {
@@ -250,7 +250,7 @@
          * 使用ajax获取类型数据
          */
         $.ajax({
-            url: "${pageContext.request.contextPath}/product?method=loadType",
+            url: "product?method=loadType",
             cache: false,
             type: "get",
             success: function (data) {
@@ -307,7 +307,8 @@
         /**
          * 点击编辑时，将数据回显到表单上
          */
-        $(".edit").click(function () {
+        $(document).on("click", ".edit", function () {
+
             var editIndex = $(".edit").index($(this));
             $info = $(".infoId:eq(" + editIndex + ") td");
             pid = $(".infoId:eq(" + editIndex + ")").find("input").first().val();
@@ -322,7 +323,7 @@
         /**
          * 提交表单并验证
          */
-        $(".submit").click(function () {
+        $(document).on("click", ".submit", function () {
             if (!check.checkName("#pname", 0) | !check.checkPrice("#pprice", 1) | check.checkDiscount("#pdiscount", 2) |
                 !check.checkStock("#pstock", 3) | !check.checkDesc("#pdesc", 4)) {
                 event.preventDefault();
@@ -344,7 +345,7 @@
             };
 
             $.ajax({
-                url: "${pageContext.request.contextPath}/product?method=updateProduct",
+                url: "product?method=updateProduct",
                 type: "post",
                 cache: false,
                 dataType: "json",
@@ -366,12 +367,12 @@
         /**
          * 删除商品
          */
-        $(".delete").click(function () {
+        $(document).on("click", ".delete", function () {
             var index = $(".delete").index($(this));
             pid = $(".infoId:eq(" + index + ")").find("input").first().val();
 
             $.ajax({
-                url: "${pageContext.request.contextPath}/product?method=deleteProduct",
+                url: "product?method=deleteProduct",
                 type: "post",
                 cache: false,
                 dataType: "json",
@@ -390,7 +391,7 @@
         /**
          * 双击图片修改图片信息
          */
-        $(".proImg").dblclick(function () {
+        $(document).on("click", ".proImg", function () {
             index = $(".proImg").index($(this));
             pid = $(".infoId:eq(" + index + ")").find("input").first().val();
             $("#imgModal").modal('show');
@@ -401,7 +402,7 @@
         /**
          * 提交图片信息，使用ajax上传图片
          */
-        $(".submit2").click(function () {
+        $(document).on("click", ".submit2", function () {
             if (!check.checkImg("#pimg", ".spanImg")) {
                 event.preventDefault();
             }
@@ -410,7 +411,7 @@
             formDate.append("pimg", $("#pimg")[0].files[0]);
             formDate.append("pid", $("#pid").val());
             $.ajax({
-                url: "${pageContext.request.contextPath}/product?method=updateProductImg",
+                url: "product?method=updateProductImg",
                 type: "post",
                 cache: false,
                 data: formDate,
@@ -418,7 +419,7 @@
                 contentType: false,
 
                 success: function (data) {
-                    $(".proImg:eq(" + index + ")").attr("src", "${pageContext.request.contextPath}/upload/" + data);
+                    $(".proImg:eq(" + index + ")").attr("src", "upload/" + data);
                     $("#imgModal").modal('hide');
                 }
             });
@@ -427,7 +428,7 @@
         /**
          * 图片修改时验证，若图片选中则显示图片
          */
-        $("#pimg").change(function () {
+        $(document).on("change", "#pimg", function () {
             var checkImg = check.checkImg(this, ".spanImg");
 
             if (checkImg) {
@@ -441,13 +442,13 @@
         /**
          * 修改商品状态为上架
          */
-        $(".on").click(function () {
+        $(document).on("click", ".on", function () {
             var $this = $(this);
             var index = $(".on").index($this);
             pid = $(".infoId:eq(" + index + ")").find("input").first().val();
 
             $.ajax({
-                url: "${pageContext.request.contextPath}/product?method=updateProductState",
+                url: "product?method=updateProductState",
                 type: "post",
                 cache: false,
                 dataType: "json",
@@ -467,13 +468,13 @@
         /**
          * 修改商品状态为下架
          */
-        $(".un").click(function () {
+        $(document).on("click", ".un", function () {
             var $this = $(this);
             var index = $(".un").index($this);
             pid = $(".infoId:eq(" + index + ")").find("input").first().val();
 
             $.ajax({
-                url: "${pageContext.request.contextPath}/product?method=updateProductState",
+                url: "product?method=updateProductState",
                 type: "post",
                 cache: false,
                 dataType: "json",
@@ -516,7 +517,7 @@
             var val = $(this).find("option:selected").val();
 
             $.ajax({
-                url: "${pageContext.request.contextPath}/product?method=updateProductCategory",
+                url: "product?method=updateProductCategory",
                 type: "post",
                 cache: false,
                 dataType: "json",

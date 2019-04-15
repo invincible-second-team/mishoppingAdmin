@@ -140,6 +140,9 @@
 <script src="${pageContext.request.contextPath}/lib/js/jquery-3.3.1.js"></script>
 <script>
     $(function () {
+        var hidden = $("[type='hidden']").val();
+        $(".li:eq(" + hidden + ")").addClass("active");
+
         $(".logout").click(function () {
             window.location.href = "${pageContext.request.contextPath}/admin?method=logout";
         });
