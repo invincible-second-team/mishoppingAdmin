@@ -1,8 +1,13 @@
 package com.oracle.mishoppingadmin.controller;
 
 import com.oracle.mishoppingadmin.bean.Admin;
+import com.oracle.mishoppingadmin.bean.Mlog;
 import com.oracle.mishoppingadmin.service.AdminService;
+import com.oracle.mishoppingadmin.service.MlogService;
 import com.oracle.mishoppingadmin.service.impl.AdminServiceImpl;
+import com.oracle.mishoppingadmin.service.impl.MlogServiceImpl;
+import com.oracle.mishoppingadmin.util.ExcelUtil;
+import com.oracle.mishoppingadmin.util.WriteUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,17 +15,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "AdminController", urlPatterns = "/admin")
 public class AdminController extends HttpServlet {
     private AdminService adminService = new AdminServiceImpl();
+    private MlogService mlogService = new MlogServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String method = request.getParameter("method");
@@ -51,11 +55,65 @@ public class AdminController extends HttpServlet {
                 break;
             case "updatePassword":
                 updatePassword(request, response);
+                break;
+            case "logList":
+                logList(request, response);
+                break;
+            case "exportFile":
+                exportFile(request, response);
+                break;
+            case "download":
+                download(request, response);
+                break;
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
+    }
+
+    private void exportFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String startTime = request.getParameter("startTime");
+        String endTime = request.getParameter("endTime");
+        String pathname = "backlog" + System.currentTimeMillis() + ".xls";
+
+        System.out.println(startTime + "----------" + endTime);
+        List<Mlog> mlogs = null;
+        try {
+            if (!"".equals(startTime) && !"".equals(endTime)) {
+                mlogs = mlogService.selectLogByTime(startTime, endTime);
+            } else {
+                mlogs = mlogService.selectLog();
+            }
+        } catch (SQLException ignored) {
+        }
+
+        if (mlogs != null) {
+            try {
+                ExcelUtil.export(Arrays.asList("mdate", "message"), "后台日志", mlogs, pathname);
+                WriteUtil.write(response, pathname);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void download(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pathname = request.getParameter("filename");
+        mlogService.download(request, response, pathname);
+        new File(pathname).delete();
+    }
+
+    private void logList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Mlog> mlogs = null;
+        try {
+            mlogs = mlogService.selectLog();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        request.setAttribute("mlogs", mlogs);
+        request.getRequestDispatcher("html/logmanage.jsp").forward(request, response);
     }
 
     protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -69,20 +127,27 @@ public class AdminController extends HttpServlet {
         } catch (SQLException ignored) {
         }
 
-        response.setContentType("text/html;charset=utf-8");
-        PrintWriter writer = response.getWriter();
         if (loginAdmin != null) {
             HttpSession session = request.getSession();
             session.setAttribute("loginAdmin", loginAdmin);
-            writer.print(true);
-        } else {
-            writer.print(false);
         }
-        writer.flush();
-        writer.close();
+
+        try {
+            mlogService.insertAmdinMlog(request, loginAdmin != null ? 1 : 0, loginAdmin);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        WriteUtil.write(response, loginAdmin != null);
     }
 
     protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            mlogService.insertAmdinMlog(request, 1, (Admin) request.getSession().getAttribute("loginAdmin"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         request.getSession().invalidate();
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
@@ -97,11 +162,7 @@ public class AdminController extends HttpServlet {
         } catch (SQLException ignored) {
         }
 
-        response.setContentType("text/html;charset=utf-8");
-        PrintWriter writer = response.getWriter();
-        writer.print(selectAdmin == null);
-        writer.flush();
-        writer.close();
+        WriteUtil.write(response, selectAdmin == null);
     }
 
     protected void addAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -118,13 +179,17 @@ public class AdminController extends HttpServlet {
             }
         }
 
-        response.setContentType("text/html;charset=utf-8");
-        PrintWriter writer = response.getWriter();
-        writer.print(b);
+        try {
+            mlogService.insertAmdinMlog(request, b ? 1 : 0, (Admin) request.getSession().getAttribute("loginAdmin"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        WriteUtil.write(response, b);
     }
 
     protected void adminList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("loginAdmin") == null){
+        if (request.getSession().getAttribute("loginAdmin") == null) {
             request.setAttribute("msg", "请登录！");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
@@ -153,10 +218,13 @@ public class AdminController extends HttpServlet {
         } catch (SQLException ignored) {
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.print(b);
-        writer.flush();
-        writer.close();
+        try {
+            mlogService.insertAmdinMlog(request, b ? 1 : 0, (Admin) request.getSession().getAttribute("loginAdmin"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        WriteUtil.write(response, b);
     }
 
     /**
@@ -172,17 +240,20 @@ public class AdminController extends HttpServlet {
         } catch (SQLException ignored) {
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.print(b);
-        writer.flush();
-        writer.close();
+        try {
+            mlogService.insertAmdinMlog(request, b ? 1 : 0, (Admin) request.getSession().getAttribute("loginAdmin"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        WriteUtil.write(response, b);
     }
 
     /**
      * 检查密码
      */
     protected void checkPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String adminname = ((Admin)request.getSession().getAttribute("loginAdmin")).getAdminname();
+        String adminname = ((Admin) request.getSession().getAttribute("loginAdmin")).getAdminname();
         String password = request.getParameter("password");
 
         Admin admin = new Admin(adminname, password);
@@ -192,17 +263,14 @@ public class AdminController extends HttpServlet {
         } catch (SQLException ignored) {
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.print(selectAdmin != null);
-        writer.flush();
-        writer.close();
+        WriteUtil.write(response, selectAdmin != null);
     }
 
     /**
      * 更新管理员密码
      */
     protected void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String adminname = ((Admin)request.getSession().getAttribute("loginAdmin")).getAdminname();
+        String adminname = ((Admin) request.getSession().getAttribute("loginAdmin")).getAdminname();
         String newPassword = request.getParameter("newPassword");
 
         Admin admin = new Admin(adminname, newPassword);
@@ -212,9 +280,14 @@ public class AdminController extends HttpServlet {
         } catch (SQLException ignored) {
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.print(b);
-        writer.flush();
-        writer.close();
+        try {
+            mlogService.insertAmdinMlog(request, b ? 1 : 0, (Admin) request.getSession().getAttribute("loginAdmin"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        WriteUtil.write(response, b);
     }
+
+
 }

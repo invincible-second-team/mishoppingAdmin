@@ -1,11 +1,17 @@
 package com.oracle.mishoppingadmin.controller;
 
+import com.oracle.mishoppingadmin.bean.Admin;
 import com.oracle.mishoppingadmin.bean.Category;
+import com.oracle.mishoppingadmin.bean.Mlog;
 import com.oracle.mishoppingadmin.bean.Products;
+import com.oracle.mishoppingadmin.dao.ProductDao;
+import com.oracle.mishoppingadmin.service.MlogService;
 import com.oracle.mishoppingadmin.service.ProductService;
+import com.oracle.mishoppingadmin.service.impl.MlogServiceImpl;
 import com.oracle.mishoppingadmin.service.impl.ProductServiceImpl;
 import com.oracle.mishoppingadmin.util.FastJsonUtil;
 import com.oracle.mishoppingadmin.util.UploadUtil;
+import com.oracle.mishoppingadmin.util.WriteUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +27,7 @@ import java.util.Map;
 @WebServlet(name = "ProductController", urlPatterns = "/product")
 public class ProductController extends HttpServlet {
     private ProductService productService = new ProductServiceImpl();
+    private MlogService mlogService = new MlogServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String method = request.getParameter("method");
@@ -65,10 +72,7 @@ public class ProductController extends HttpServlet {
         } catch (SQLException ignored) {
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.print(catagoriesJson);
-        writer.flush();
-        writer.close();
+        WriteUtil.write(response, catagoriesJson);
     }
 
     private Products productsInfo(Map<String, String> map) {
@@ -99,9 +103,13 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
         }
 
-        String notice = b ? "商品添加成功" : "商品添加失败";
-        request.setAttribute("notice", notice);
-        request.getRequestDispatcher("html/success.jsp").forward(request, response);
+        try {
+            mlogService.insertProductMlog(request, b ? 1 : 0, (Admin) request.getSession().getAttribute("loginAdmin"),
+                    products);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        WriteUtil.write(response, b);
     }
 
     protected void productManage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -112,7 +120,7 @@ public class ProductController extends HttpServlet {
         }
 
         request.setAttribute("productInfo", productInfo);
-        request.getRequestDispatcher( "html/productmanage.jsp").forward(request, response);
+        request.getRequestDispatcher("html/productmanage.jsp").forward(request, response);
     }
 
     protected void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -137,10 +145,7 @@ public class ProductController extends HttpServlet {
         } catch (SQLException ignored) {
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.print(b);
-        writer.flush();
-        writer.close();
+        WriteUtil.write(response, b);
     }
 
     protected void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -153,10 +158,13 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.print(b);
-        writer.flush();
-        writer.close();
+        try {
+            mlogService.insertProductMlog(request, b ? 1 : 0, (Admin) request.getSession().getAttribute("loginAdmin"),
+                    new Products(Long.valueOf(pid)));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        WriteUtil.write(response, b);
     }
 
     protected void updateProductState(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -174,10 +182,13 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.print(b);
-        writer.flush();
-        writer.close();
+        try {
+            mlogService.insertProductMlog(request, b ? 1 : 0, (Admin) request.getSession().getAttribute("loginAdmin"),
+                   products);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        WriteUtil.write(response, b);
     }
 
     protected void updateProductImg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -195,11 +206,15 @@ public class ProductController extends HttpServlet {
         }
 
         System.out.println(upload.get("filename"));
+        try {
+            mlogService.insertProductMlog(request, b ? 1 : 0, (Admin) request.getSession().getAttribute("loginAdmin"),
+                    products);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         if (b) {
-            PrintWriter writer = response.getWriter();
-            writer.print(upload.get("filename"));
-            writer.flush();
-            writer.close();
+            WriteUtil.write(response, upload.get("filename"));
         }
     }
 
@@ -218,9 +233,12 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.print(b);
-        writer.flush();
-        writer.close();
+        try {
+            mlogService.insertProductMlog(request, b ? 1 : 0, (Admin) request.getSession().getAttribute("loginAdmin"),
+                    products);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        WriteUtil.write(response, b);
     }
 }

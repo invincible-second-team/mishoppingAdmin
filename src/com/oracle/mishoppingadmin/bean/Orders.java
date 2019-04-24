@@ -1,13 +1,14 @@
 package com.oracle.mishoppingadmin.bean;
 
 
-public class Order {
+public class Orders {
 
   private long oid;
   private String onum;
   private long ostate;
   private String ocreatetime;
   private String oupdatetime;
+  private long aid;
 
 
   public long getOid() {
@@ -52,6 +53,15 @@ public class Order {
 
   public void setOupdatetime(String oupdatetime) {
     this.oupdatetime = oupdatetime;
+  }
+
+
+  public long getAid() {
+    return aid;
+  }
+
+  public void setAid(long aid) {
+    this.aid = aid;
   }
 
 }

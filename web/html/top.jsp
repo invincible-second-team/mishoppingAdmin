@@ -30,7 +30,7 @@
                    aria-expanded="false">${loginAdmin.adminname} <span class="caret"></span></a>
                 <ul class="dropdown-menu animated fadeInDown">
                     <li class="profile-img">
-                        <img src="../img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
+                        <img src="${pageContext.request.contextPath}/img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
                     </li>
                     <li>
                         <div class="profile-info">
@@ -127,6 +127,8 @@
                                 <li><a href="${pageContext.request.contextPath}/html/addadmin.jsp">添加管理员</a>
                                 </li>
                                 <li><a href="${pageContext.request.contextPath}/html/changepass.jsp">修改密码</a>
+                                </li>
+                                <li><a href="${pageContext.request.contextPath}/admin?method=logList">查看日志</a>
                                 </li>
                             </ul>
                         </div>

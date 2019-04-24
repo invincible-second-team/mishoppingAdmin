@@ -2,7 +2,7 @@ create table address
 (
   aid    int auto_increment
     primary key,
-  uid    int          not null,
+  adminid    int          not null,
   addr   varchar(200) not null,
   aphone varchar(11)  not null
 );
@@ -32,7 +32,7 @@ create table collection
   clid int auto_increment
   comment '收藏id'
     primary key,
-  uid  int not null,
+  adminid  int not null,
   pid  int not null
 )
   comment '收藏表';
@@ -86,7 +86,7 @@ create table productsorder
 
 create table users
 (
-  uid       int             not null
+  adminid       int             not null
   comment '用户id'
     primary key,
   uname     varchar(20)     not null

@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="../product?method=addProduct" enctype="multipart/form-data" method="post">
+                                <form enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="pimg">商品图片</label><br/>
                                         <img src="" alt="商品图片" hidden="hidden" id="img" height="200" width="160">
@@ -73,7 +73,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="pprice">商品描述</label>
+                                        <label for="pdesc">商品描述</label>
                                         <div>
                                             <textarea class="form-control" rows="3" id="pdesc" name="pdesc"
                                                       placeholder="Product Desc"></textarea>
@@ -108,8 +108,8 @@
                                         <span class="span" style="font-size: 16px"></span>
                                     </div>
 
-                                    <button type="submit" class="btn btn-default submit">Submit</button>
                                 </form>
+                                <button type="button" class="btn btn-default submit">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -137,10 +137,10 @@
         <script type="text/javascript" src="../js/check.js"></script>
 
         <script>
-            /**
-             * 使用ajax向后台获取类型数据
-             */
             $(function () {
+                /**
+                 * 使用ajax向后台获取类型数据
+                 */
                 $.ajax({
                     url: "../product?method=loadType",
                     cache: false,
@@ -162,6 +162,49 @@
                     }
                 });
 
+                /**
+                 * 添加商品
+                 */
+                $(document).on("click", ".submit", function () {
+                    if (!check.checkImg("#pimg", ".spanImg")) {
+                        event.preventDefault();
+                    }
+
+                    var formDate = new FormData();
+                    formDate.append("pimg", $("#pimg")[0].files[0]);
+                    formDate.append("pname", $("#pname").val());
+                    formDate.append("pprice", $("#pprice").val());
+                    formDate.append("pstock", $("#pstock").val());
+                    formDate.append("pdiscount", $("#pdiscount").val());
+                    formDate.append("pdesc", $("#pdesc").val());
+                    formDate.append("ptype", $("#ptype").val());
+                    formDate.append("pstate", $("input[name='pstate']").val());
+
+
+                    $.ajax({
+                        url: "../product?method=addProduct",
+                        type: "post",
+                        cache: false,
+                        data: formDate,
+                        processData: false,
+                        contentType: false,
+
+                        success: function (data) {
+                            var span;
+                            if (data) {
+                                span = "<span style='font-size: 20px; font-weight: bold;'>添加成功</span>";
+                            } else {
+                                span = "<span style='font-size: 20px; font-weight: bold;'>添加失败</span>";
+                            }
+                            span += '<div><button type="button" class="btn btn-info returnBefore">返回上一页</button></div>';
+                            $(".form-div").html(span);
+                        }
+                    });
+                });
+
+                $('.returnBefore').click(function () {
+                    window.location.reload();
+                });
 
                 /**
                  * 图片修改时验证

@@ -14,6 +14,13 @@ public class Products {
     private double ppricediscount;
 
 
+    public Products() {
+    }
+
+    public Products(long pid) {
+        this.pid = pid;
+    }
+
     public long getPid() {
         return pid;
     }
@@ -97,16 +104,15 @@ public class Products {
 
     @Override
     public String toString() {
-        return "Products{" +
-                "pid=" + pid +
-                ", pname='" + pname + '\'' +
-                ", pprice=" + pprice +
-                ", pstock=" + pstock +
-                ", pdes='" + pdes + '\'' +
-                ", pimg='" + pimg + '\'' +
-                ", pstate=" + pstate +
-                ", categoryid=" + categoryid +
-                ", ppricediscount=" + ppricediscount +
-                '}';
+        return "{" +
+                ", 名称：" + pname +
+                ", 价格：" + pprice +
+                ", 库存：" + pstock +
+                ", 描述：" + pdes +
+                ", 图片：" + pimg +
+                ", 状态：" + pstate +
+                ", 类别编号：" + categoryid +
+                ", 折扣：" + ppricediscount +
+                "}";
     }
 }
