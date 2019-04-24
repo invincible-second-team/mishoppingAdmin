@@ -8,6 +8,7 @@ import com.oracle.mishoppingadmin.dao.ProductDao;
 import com.oracle.mishoppingadmin.dao.impl.MlogDaoImpl;
 import com.oracle.mishoppingadmin.dao.impl.ProductDaoImpl;
 import com.oracle.mishoppingadmin.service.MlogService;
+import com.oracle.mishoppingadmin.util.IPUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +34,7 @@ public class MlogServiceImpl implements MlogService {
             String adminname = null;
             switch (method) {
                 case "login":
-                    msg = "管理员:" + admin.getAdminname() + "登录";
+                    msg = "管理员:" + admin.getAdminname() + "登录，登录IP：" + IPUtil.getIpAddr(request);
                     break;
                 case "logout":
                     msg = "管理员:" + admin.getAdminname() + "登出";
