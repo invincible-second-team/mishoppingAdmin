@@ -42,7 +42,7 @@
                     <tr>
                         <td width="1100px">
                             <ul id="myTab" class="nav nav-pills">
-                                <li id="no_li"><a href="#home" role="tab" data-toggle="pill">未发货<span
+                                <li id="no_li"><a href="#home" role="tab" data-toggle="pill" >未发货<span
                                         class="badge nobadge">${requestScope.ordersList["nosendcount"]}</span></a></li>
                                 <li id="has_li"><a href="#profile" role="tab" data-toggle="pill">已发货<span
                                         class="badge hasbadge">${requestScope.ordersList["hassendcount"]}</span></a></li>

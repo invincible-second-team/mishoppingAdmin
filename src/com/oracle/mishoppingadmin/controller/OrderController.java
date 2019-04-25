@@ -1,7 +1,11 @@
 package com.oracle.mishoppingadmin.controller;
 
+import com.oracle.mishoppingadmin.bean.Admin;
+import com.oracle.mishoppingadmin.dao.MlogDao;
 import com.oracle.mishoppingadmin.pojo.ProductInfo;
+import com.oracle.mishoppingadmin.service.MlogService;
 import com.oracle.mishoppingadmin.service.OrderService;
+import com.oracle.mishoppingadmin.service.impl.MlogServiceImpl;
 import com.oracle.mishoppingadmin.service.impl.OrderServiceImpl;
 import com.oracle.mishoppingadmin.util.WriterUtil;
 import com.oracle.mishoppingadmin.pojo.OrdersInfo;
@@ -16,9 +20,12 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+
 @WebServlet(name = "OrderController",urlPatterns = "/Order")
 public class OrderController extends HttpServlet {
     private OrderService orderService=new OrderServiceImpl();
+    private MlogService mlogService=new MlogServiceImpl();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String method=request.getParameter("method");
         switch (method){
@@ -62,6 +69,12 @@ public class OrderController extends HttpServlet {
         Boolean b=false;
         try {
             b=orderService.sendgoods(request,response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            mlogService.insertAddUserlog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

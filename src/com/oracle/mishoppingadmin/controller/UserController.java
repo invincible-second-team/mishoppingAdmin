@@ -1,8 +1,12 @@
 package com.oracle.mishoppingadmin.controller;
 
+import com.oracle.mishoppingadmin.bean.Admin;
+import com.oracle.mishoppingadmin.bean.Mlog;
 import com.oracle.mishoppingadmin.bean.Users;
 import com.oracle.mishoppingadmin.dao.UserDao;
+import com.oracle.mishoppingadmin.service.MlogService;
 import com.oracle.mishoppingadmin.service.UserService;
+import com.oracle.mishoppingadmin.service.impl.MlogServiceImpl;
 import com.oracle.mishoppingadmin.service.impl.UserServiceImpl;
 import com.oracle.mishoppingadmin.util.WriterUtil;
 
@@ -19,6 +23,7 @@ import java.util.List;
 @WebServlet(name = "UserController", urlPatterns = "/User")
 public class UserController extends HttpServlet {
     private UserService userService = new UserServiceImpl();
+    private MlogService mlogService=new MlogServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String method = request.getParameter("method");
@@ -41,6 +46,7 @@ public class UserController extends HttpServlet {
             case "deleteuser":
                 deleteuser(request, response);
                 break;
+
         }
     }
 
@@ -59,6 +65,13 @@ public class UserController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        try {
+            mlogService.insertAddUserlog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         WriterUtil.writer(b,response);
     }
 
@@ -76,6 +89,13 @@ public class UserController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        try {
+            mlogService.insertAddUserlog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         WriterUtil.writer(b,response);
 
     }
@@ -94,6 +114,13 @@ public class UserController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        try {
+            mlogService.insertAddUserlog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         WriterUtil.writer(b,response);
 
     }
@@ -128,6 +155,12 @@ public class UserController extends HttpServlet {
         boolean b = false;
         try {
             b = userService.addUsers(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            mlogService.insertAddUserlog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
