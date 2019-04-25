@@ -16,7 +16,7 @@ public class MlogServiceImpl implements MlogService {
 
 
     @Override
-    public boolean insertAddUserlog(HttpServletRequest request, int success, Admin admin) throws SQLException {
+    public boolean insertUserLog(HttpServletRequest request, int success, Admin admin) throws SQLException {
         String contextPath =request.getContextPath();
         String method=request.getParameter("method");
 

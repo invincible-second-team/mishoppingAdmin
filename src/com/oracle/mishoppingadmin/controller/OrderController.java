@@ -1,14 +1,12 @@
 package com.oracle.mishoppingadmin.controller;
 
 import com.oracle.mishoppingadmin.bean.Admin;
-import com.oracle.mishoppingadmin.dao.MlogDao;
 import com.oracle.mishoppingadmin.pojo.ProductInfo;
 import com.oracle.mishoppingadmin.service.MlogService;
 import com.oracle.mishoppingadmin.service.OrderService;
 import com.oracle.mishoppingadmin.service.impl.MlogServiceImpl;
 import com.oracle.mishoppingadmin.service.impl.OrderServiceImpl;
 import com.oracle.mishoppingadmin.util.WriterUtil;
-import com.oracle.mishoppingadmin.pojo.OrdersInfo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -74,7 +72,7 @@ public class OrderController extends HttpServlet {
         }
 
         try {
-            mlogService.insertAddUserlog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
+            mlogService.insertUserLog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

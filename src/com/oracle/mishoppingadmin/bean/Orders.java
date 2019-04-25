@@ -1,5 +1,6 @@
 package com.oracle.mishoppingadmin.bean;
 
+
 public class Orders {
 
     private long oid;
@@ -7,13 +8,13 @@ public class Orders {
     private long ostate;
     private String ocreatetime;
     private String oupdatetime;
+    private long aid;
 
-
-    public Orders() {
+    public Orders(long oid) {
+        this.oid = oid;
     }
 
-    public Orders(long ostate) {
-        this.ostate = ostate;
+    public Orders() {
     }
 
     public Orders(long oid, long ostate) {
@@ -65,14 +66,13 @@ public class Orders {
         this.oupdatetime = oupdatetime;
     }
 
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "oid=" + oid +
-                ", onum='" + onum + '\'' +
-                ", ostate=" + ostate +
-                ", ocreatetime='" + ocreatetime + '\'' +
-                ", oupdatetime='" + oupdatetime + '\'' +
-                '}';
+
+    public long getAid() {
+        return aid;
     }
+
+    public void setAid(long aid) {
+        this.aid = aid;
+    }
+
 }

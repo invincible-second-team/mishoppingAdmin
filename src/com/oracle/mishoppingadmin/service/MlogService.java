@@ -6,5 +6,5 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
 public interface MlogService {
-    public boolean insertAddUserlog(HttpServletRequest request,int  success, Admin admin) throws SQLException;
+    public boolean insertUserLog(HttpServletRequest request, int  success, Admin admin) throws SQLException;
 }

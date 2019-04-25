@@ -84,14 +84,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Boolean sendgoods(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         Long oid = Long.valueOf(request.getParameter("oid"));
-        Long ostate=1L;
-        Orders orders = new Orders(oid,ostate);
+        Long ostate = 1L;
+        Orders orders = new Orders(oid, ostate);
         Boolean b = orderDao.goodsstate(orders);
         return b;
     }
 
     /**
      * 查看订单细节
+     *
      * @param request
      * @param response
      * @return
@@ -100,10 +101,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<ProductInfo> showdetails(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         Long oid = Long.valueOf(request.getParameter("oid"));
-        Orders orders=new Orders();
+        Orders orders = new Orders();
         orders.setOid(oid);
-        List<ProductInfo> details=orderDao.showdetails(orders);
-        System.out.println("service"+details);
+        List<ProductInfo> details = orderDao.showdetails(orders);
+        System.out.println("service" + details);
         return details;
     }
 

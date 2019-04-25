@@ -1,9 +1,7 @@
 package com.oracle.mishoppingadmin.controller;
 
 import com.oracle.mishoppingadmin.bean.Admin;
-import com.oracle.mishoppingadmin.bean.Mlog;
 import com.oracle.mishoppingadmin.bean.Users;
-import com.oracle.mishoppingadmin.dao.UserDao;
 import com.oracle.mishoppingadmin.service.MlogService;
 import com.oracle.mishoppingadmin.service.UserService;
 import com.oracle.mishoppingadmin.service.impl.MlogServiceImpl;
@@ -16,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -67,7 +64,7 @@ public class UserController extends HttpServlet {
         }
 
         try {
-            mlogService.insertAddUserlog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
+            mlogService.insertUserLog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -91,7 +88,7 @@ public class UserController extends HttpServlet {
         }
 
         try {
-            mlogService.insertAddUserlog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
+            mlogService.insertUserLog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -116,7 +113,7 @@ public class UserController extends HttpServlet {
         }
 
         try {
-            mlogService.insertAddUserlog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
+            mlogService.insertUserLog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -160,7 +157,7 @@ public class UserController extends HttpServlet {
         }
 
         try {
-            mlogService.insertAddUserlog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
+            mlogService.insertUserLog(request,b?1:0,(Admin)request.getSession().getAttribute("loginAdmin"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
