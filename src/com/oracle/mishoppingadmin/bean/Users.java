@@ -10,6 +10,43 @@ public class Users {
   private String uphone;
   private long ustate;
 
+  public Users(){
+
+  }
+
+  public Users(String uname) {
+    this.uname = uname;
+  }
+
+  public Users(String uname, String upassword, String nickname, String uphone) {
+    this.uname = uname;
+    this.upassword = upassword;
+    this.nickname = nickname;
+    this.uphone = uphone;
+  }
+
+  public Users(String upassword, String nickname, String uphone) {
+    this.upassword = upassword;
+    this.nickname = nickname;
+    this.uphone = uphone;
+  }
+
+  public Users(long uid, String uname, String upassword, String nickname, String uphone) {
+    this.uid = uid;
+    this.uname = uname;
+    this.upassword = upassword;
+    this.nickname = nickname;
+    this.uphone = uphone;
+  }
+
+  public Users(long uid, long ustate) {
+    this.uid = uid;
+    this.ustate = ustate;
+  }
+
+  public Users(long uid) {
+    this.uid = uid;
+  }
 
   public long getUid() {
     return uid;

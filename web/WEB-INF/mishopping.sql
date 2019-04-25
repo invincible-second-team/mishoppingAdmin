@@ -86,7 +86,7 @@ create table productsorder
 
 create table users
 (
-  uid       int             not null
+  uid       int             auto_increment
   comment '用户id'
     primary key,
   uname     varchar(20)     not null

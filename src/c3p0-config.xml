@@ -3,7 +3,7 @@
     <!--默认配置-->
     <default-config>
         <property name="driverClass">com.mysql.jdbc.Driver</property>
-        <property name="jdbcUrl">jdbc:mysql://120.78.201.85/mishopping</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost/mishopping</property>
         <property name="user">root</property>
         <property name="password">root</property>
         <property name="initialPoolSize">10</property>
