@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/mishoppingAdmin</output-path>
     <root id="archive" name="mishoppingAdmin.war">
       <element id="artifact" artifact-name="mishoppingAdmin:war exploded" />
-      <element id="dir-copy" path="$PROJECT_DIR$/web" />
     </root>
   </artifact>
 </component>
