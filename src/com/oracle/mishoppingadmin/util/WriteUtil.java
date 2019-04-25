@@ -18,4 +18,11 @@ public class WriteUtil {
         writer.flush();
         writer.close();
     }
+
+    public static void write(HttpServletResponse response, int i) throws IOException {
+        PrintWriter writer = response.getWriter();
+        writer.print(i);
+        writer.flush();
+        writer.close();
+    }
 }

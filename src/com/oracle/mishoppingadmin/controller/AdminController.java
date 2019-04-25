@@ -6,7 +6,9 @@ import com.oracle.mishoppingadmin.service.AdminService;
 import com.oracle.mishoppingadmin.service.MlogService;
 import com.oracle.mishoppingadmin.service.impl.AdminServiceImpl;
 import com.oracle.mishoppingadmin.service.impl.MlogServiceImpl;
+import com.oracle.mishoppingadmin.sms.RestUtil;
 import com.oracle.mishoppingadmin.util.ExcelUtil;
+import com.oracle.mishoppingadmin.util.RandomValueUtil;
 import com.oracle.mishoppingadmin.util.WriteUtil;
 
 import javax.servlet.ServletException;
@@ -29,9 +31,6 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String method = request.getParameter("method");
         switch (method) {
-            case "login":
-                login(request, response);
-                break;
             case "logout":
                 logout(request, response);
                 break;
@@ -116,38 +115,7 @@ public class AdminController extends HttpServlet {
         request.getRequestDispatcher("html/logmanage.jsp").forward(request, response);
     }
 
-    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String adminname = request.getParameter("adminname");
-        String adminpassword = request.getParameter("adminpassword");
-
-        Admin admin = new Admin(adminname, adminpassword);
-        Admin loginAdmin = null;
-        try {
-            loginAdmin = adminService.selectAdmin(admin);
-        } catch (SQLException ignored) {
-        }
-
-        if (loginAdmin != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("loginAdmin", loginAdmin);
-        }
-
-        try {
-            mlogService.insertAmdinMlog(request, loginAdmin != null ? 1 : 0, loginAdmin);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        WriteUtil.write(response, loginAdmin != null);
-    }
-
     protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            mlogService.insertAmdinMlog(request, 1, (Admin) request.getSession().getAttribute("loginAdmin"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         request.getSession().invalidate();
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
@@ -189,10 +157,10 @@ public class AdminController extends HttpServlet {
     }
 
     protected void adminList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("loginAdmin") == null) {
-            request.setAttribute("msg", "请登录！");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        }
+//        if (request.getSession().getAttribute("loginAdmin") == null) {
+//            request.setAttribute("msg", "请登录！");
+//            request.getRequestDispatcher("/login.jsp").forward(request, response);
+//        }
 
         List<Admin> admins = null;
         try {

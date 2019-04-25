@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface MlogService {
+    boolean insertAmdinMlog(String msg, int success, Admin admin) throws SQLException;
 
     boolean insertAmdinMlog(HttpServletRequest request, int success, Admin admin) throws SQLException;
 
@@ -21,4 +22,5 @@ public interface MlogService {
     List<Mlog> selectLog() throws SQLException;
 
     void download(HttpServletRequest request, HttpServletResponse response, String fileName) throws IOException;
+
 }

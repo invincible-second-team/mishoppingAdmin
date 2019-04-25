@@ -20,7 +20,12 @@
     <form method="post" action="">
         <input type="text" name="adminname" placeholder="Username" required="required"/>
         <input type="password" name="adminpassword" placeholder="Password" required="required"/>
-        <button type="button" class="btn btn-primary btn-block btn-large">登录</button>
+        <input type="text" name="phone" placeholder="phone" required="required" style="width: 58%"/>
+        <button type="button" class="btn btn-primary getValidation" name="getValidation"
+                style="width: 40%; height: 34px">获取验证码
+        </button>
+        <input type="text" name="verificationcode" placeholder="Verification code" required="required"/>
+        <button type="button" class="btn btn-primary btn-block btn-large loginBtn">登录</button>
     </form>
 </div>
 
@@ -28,38 +33,73 @@
 <script src="${pageContext.request.contextPath}/lib/js/jquery-3.3.1.js"></script>
 <script>
     $(function () {
-        var flag = false;
+        // var flag = false;
 
-        $("input:lt(2)").focus(function () {
+        $("input").focus(function () {
             $(".notice").text("");
         });
 
-        $("button").click(function () {
+
+        $(".getValidation").click(function () {
+            var reg = /^1[34578]\d{9}$/;
+            var phone = $('input[name="phone"]').val();
+            if (!reg.test(phone)) {
+                $(".notice").text("手机号格式错误！");
+                return
+            }
+
+            var data = {
+                "phone": phone
+            };
+            $.get("login?method=validation", data, function () {
+                console.log("发送成功");
+            });
+
+
+            var i = 10;
+            $(".getValidation").attr('disabled', true);
+            var timer = setInterval(function () {
+                $(".getValidation").text(i + "s后重发");
+                if (i === 0) {
+                    clearInterval(timer);
+                    $(".getValidation").attr('disabled', false).text("获取验证码");
+                }
+                i--;
+            }, 1000);
+
+        });
+
+        $(".loginBtn").click(function () {
             var adminname = $("input:first").val();
             var adminpassword = $("input:eq(1)").val();
+            var code = $('input[name="verificationcode"]').val();
 
             if (adminname.length === 0 || adminpassword.length === 0) {
-                $(".notice").text("账号或不能为空");
+                $(".notice").text("账号或密码不能为空");
                 return;
             }
 
-            if (flag) {
-                return;
-            }
-            flag = true;
+            // if (flag) {
+            //     return;
+            // }
+            // flag = true;
             $.ajax({
-                url: "${pageContext.request.contextPath}/admin?method=login",
+                url: "login",
                 type: "post",
                 data: {
+                    "method": "login",
                     "adminname": adminname,
-                    "adminpassword": adminpassword
+                    "adminpassword": adminpassword,
+                    "verificationcode": code
                 },
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    flag = false;
-                    if (data === true) {
-                        location.href = "${pageContext.request.contextPath}/html/index.jsp";
+                    // flag = false;
+                    if (data === 2) {
+                        location.href = "html/index.jsp";
+                    } else if (data === 1) {
+                        $(".notice").text("验证码错误");
                     } else {
                         $(".notice").text("账号或密码错误");
                     }

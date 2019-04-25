@@ -24,6 +24,20 @@ public class MlogServiceImpl implements MlogService {
     private MlogDao mlogDao = new MlogDaoImpl();
 
     @Override
+    public boolean insertAmdinMlog(String msg, int success, Admin admin) throws SQLException {
+        Mlog mlog = new Mlog();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = sdf.format(new Date());
+        mlog.setMessage(msg);
+        mlog.setAdminid(admin.getAdminid());
+        mlog.setSuccess(success);
+        mlog.setMdate(date);
+
+        return mlogDao.insertMlog(mlog);
+    }
+
+    @Override
     public boolean insertAmdinMlog(HttpServletRequest request, int success, Admin admin) throws SQLException {
         String contextPath = request.getContextPath();
         String method = request.getParameter("method");
@@ -127,7 +141,7 @@ public class MlogServiceImpl implements MlogService {
         File file = new File(fileName);
 
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition","attachment;filename=" + fileName);
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
         response.setContentLength((int) file.length());
 
         FileInputStream fis = null;

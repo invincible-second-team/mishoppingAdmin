@@ -70,6 +70,20 @@ public class RandomValueUtil {
         return (int) (Math.random() * (end - start + 1) + start);
     }
 
+    /**
+     * 获取指定长度的验证码
+     */
+    public static String verification(int length) {
+        StringBuilder code = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            Random random = new Random();
+            code.append(random.nextInt(10));
+        }
+        return code.toString();
+    }
+
+
     public static double getDouble(double start, double end) {
         DecimalFormat df = new DecimalFormat("#0.00");
         return Double.parseDouble(df.format(Math.random() * (end - start) + start));

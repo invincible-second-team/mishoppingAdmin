@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Session过滤
  */
-@WebFilter(urlPatterns = {"/html/*", "/product"})
+@WebFilter(urlPatterns = {"/html/*", "/product", "/admin"})
 public class SessionFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
