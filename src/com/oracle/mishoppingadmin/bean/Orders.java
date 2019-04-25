@@ -10,8 +10,8 @@ public class Orders {
     private String oupdatetime;
     private long aid;
 
-    public Orders(long oid) {
-        this.oid = oid;
+    public Orders(long ostate) {
+        this.ostate = ostate;
     }
 
     public Orders() {

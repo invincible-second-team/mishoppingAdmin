@@ -45,6 +45,7 @@ public class OrderServiceImpl implements OrderService {
         Long hassendcount = orderDao.count(hassendorders);
         Long signsendcount = orderDao.count(signsendorders);
         Long errorsendcount = orderDao.count(errorsendorders);
+        System.out.println(hassendcount);
 
         /**
          * 已发货列表

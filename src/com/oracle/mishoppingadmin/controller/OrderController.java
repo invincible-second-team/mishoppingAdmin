@@ -94,6 +94,7 @@ public class OrderController extends HttpServlet {
             e.printStackTrace();
         }
 
+        System.out.println(ordersList);
         request.setAttribute("ordersList",ordersList);
         request.getRequestDispatcher("/html/ordermanage.jsp").forward(request, response);
     }
