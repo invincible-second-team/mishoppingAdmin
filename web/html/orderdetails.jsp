@@ -85,7 +85,7 @@
                                             <td>订单总价：<fmt:formatNumber value="${sum}" pattern="00.00#" />元</td>
                                             </tr>
                                         </table>
-                                        <button><a href="Order?method=ordersList&state=0">返回上一页</a></button>
+                                        <button><a href="#" onClick="javascript :history.back(-1);">返回上一页</a></button>
                                     </div>
                                 </div>
                             </div>

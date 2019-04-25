@@ -23,4 +23,5 @@ public interface MlogService {
 
     void download(HttpServletRequest request, HttpServletResponse response, String fileName) throws IOException;
 
+    boolean insertUserLog(HttpServletRequest request, int  success, Admin admin) throws SQLException;
 }
