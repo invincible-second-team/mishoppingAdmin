@@ -1,5 +1,7 @@
 package com.oracle.mishoppingadmin.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.oracle.mishoppingadmin.bean.Admin;
 import com.oracle.mishoppingadmin.pojo.ProductInfo;
 import com.oracle.mishoppingadmin.service.MlogService;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -36,8 +39,36 @@ public class OrderController extends HttpServlet {
             case "showdetails":
                 showdetails(request,response);
                 break;
+            case "msales":
+                msales(request,response);
+                break;
 
         }
+    }
+
+    /**
+     * 查询月销售量
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void msales(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<ProductInfo> ml=null;
+        try {
+            ml=orderService.msales(request,response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        JSONArray array= JSONArray.parseArray(JSON.toJSONString(ml));
+
+        System.out.println(array.toString());
+        PrintWriter writer = response.getWriter();
+        writer.print(array.toString());
+        writer.flush();
+        writer.close();
+
     }
 
     /**

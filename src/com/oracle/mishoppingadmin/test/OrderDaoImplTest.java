@@ -56,4 +56,12 @@ public class OrderDaoImplTest {
         List<ProductInfo> l=orderDao.showdetails(orders);
         System.out.println(l);
     }
+    /**
+     * 统计销售数量
+     */
+    @Test
+    public void msales()throws SQLException{
+        List<ProductInfo> l=orderDao.msales();
+        System.out.println(l);
+    }
 }

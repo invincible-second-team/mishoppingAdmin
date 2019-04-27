@@ -46,10 +46,27 @@ public class OrderDaoImpl implements OrderDao {
         return update!=0;
     }
 
+    /**
+     * 显示订单细节
+     * @param orders
+     * @return
+     * @throws SQLException
+     */
     @Override
     public List<ProductInfo> showdetails(Orders orders) throws SQLException {
         String sql="select products.pid,pname,pprice,ppricediscount,pnum from products,productsorder,orders where productsorder.oid = orders.oid and products.pid = productsorder.pid and orders.oid = ?";
         return queryRunner.query(sql,new BeanListHandler<ProductInfo>(ProductInfo.class),orders.getOid());
+    }
+
+    /**
+     * 统计月销量
+     * @return
+     * @throws SQLException
+     */
+    @Override
+    public List<ProductInfo> msales() throws SQLException {
+        String sql="select pname,pnum from productsorder,products where productsorder.pid=products.pid group by products.pid;";
+        return queryRunner.query(sql,new BeanListHandler<ProductInfo>(ProductInfo.class));
     }
 
 

@@ -105,8 +105,21 @@ public class OrderServiceImpl implements OrderService {
         Orders orders = new Orders();
         orders.setOid(oid);
         List<ProductInfo> details = orderDao.showdetails(orders);
-        System.out.println("service" + details);
+       //System.out.println("service" + details);
         return details;
+    }
+
+    /**
+     * 统计月销量
+     * @param request
+     * @param response
+     * @return
+     * @throws SQLException
+     */
+    @Override
+    public List<ProductInfo> msales(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        List<ProductInfo> lm=orderDao.msales();
+        return lm;
     }
 
 }

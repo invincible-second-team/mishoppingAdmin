@@ -30,4 +30,8 @@ public interface OrderDao {
      */
     public List<ProductInfo>showdetails(Orders orders) throws SQLException;
 
+    /**
+     * 显示月销量
+     */
+    public List<ProductInfo>msales() throws SQLException;
 }

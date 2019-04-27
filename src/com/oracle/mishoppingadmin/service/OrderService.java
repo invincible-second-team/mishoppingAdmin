@@ -25,4 +25,9 @@ public interface OrderService {
      */
     public List<ProductInfo> showdetails (HttpServletRequest request, HttpServletResponse response) throws SQLException;
 
+    /**
+     * 统计月销量
+     */
+    public List<ProductInfo> msales (HttpServletRequest request, HttpServletResponse response) throws SQLException;
+
 }

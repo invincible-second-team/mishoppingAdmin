@@ -265,6 +265,7 @@
                                                     <td>${e.addr}</td>
                                                     <td>${e.ostate eq 5?"异常":"错误异常"}</td>
                                                     <td>
+                                                        <button type="button" class="btn btn-info goodsdetails">处理异常</button>
                                                         <button type="button" class="btn btn-success goodsdetails"><a href="Order?method=showdetails&oid=${e.oid}">查看详情</a></button>
                                                     </td>
                                                 </tr>

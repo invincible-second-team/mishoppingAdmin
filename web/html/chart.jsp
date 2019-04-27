@@ -36,9 +36,9 @@
                     <span class="title">销售报表</span>
                 </div>
                 <div id="chartbyline" style="width:600px; height: 400px;"></div>
-                <div id="chartbybar" style="width:600px; height: 400px;"></div>
-                <div id="chartbypie" style="width:600px; height: 400px;"></div>
-                <div id="chartmain" style="width:600px; height: 400px;"></div>
+                <div id="chartbypie" style="width:600px; height: 300px;"></div>
+
+
 
             </div>
         </div>
@@ -59,10 +59,11 @@
         <script type="text/javascript" src="../lib/js/ace/mode-html.js"></script>
         <script type="text/javascript" src="../lib/js/ace/theme-github.js"></script>
         <script type="text/javascript" src="../lib/js/echarts.min.js"></script>
-        <!-- Javascript -->
-        <script type="text/javascript" src="../js/app.js"></script>
-        <script type="text/javascript" src="../js/ordermanage.js"></script>
         <script type="text/javascript">
+            //初始化echarts实例
+            var myChartbyline = echarts.init(document.getElementById('chartbyline'));
+            //初始化echarts实例
+            var myChartbypie = echarts.init(document.getElementById('chartbypie'));
             //指定图标的配置和数据
             myChartbyline.setOption ({
                 title:{
@@ -70,47 +71,115 @@
                 },
                 tooltip:{},
                 legend:{
-                    data:['月销量']
+                    data:['销量']
                 },
                 xAxis:{
                     data:[]
                 },
-                yAxis:{
-
-                },
+                yAxis:{},
                 series:[{
                     name:'销量',
                     type:'line',
                     data:[]
                 }]
             });
-            //初始化echarts实例
-            var myChartbyline = echarts.init(document.getElementById('chartbyline'));
+
             //使用制定的配置项和数据显示图表
 
-            $.ajax({
-                url:"",
-                cache:false,
-                seccess:function (data) {
-                    myChartbyline.setOption({
-                        xAxis:{
-                            data:data.months
-                        },
-                        series:[{
-                            name:'销量',
-                            type:'line',
-                            data:data.data
-                        }]
-                    })
+            myChartbyline.showLoading();
+
+            var names=[];
+            var nums=[];
+
+            //使用制定的配置项和数据显示图表
+           /* myChartbypie.setOption({
+                title: {
+                    text: '销售总量报表-饼状图'
                 },
-                error:function (error) {
-                    console.log(error);
-                }
+                tooltip:{
+                  formatter:"{a} <br/>{b}: {c} ({d}%)"
+                },
+                series: [{
+                    name: '销量',
+                    type: 'pie',
+                    radius: '60%',
+                    data: [
+
+                    ]
+                }]
+            });*/
+
+
+            $.ajax({
+                url:"../Order?method=msales",
+                dataType:"json",
+                cache:false,
+                type:"post",
+                success:function (data) {
+                    if (data){
+                        for (var i=0;i<data.length;i++){
+                            names.push(data[i].pname);
+                        }
+                        for (var n=0;n<data.length;n++){
+                            nums.push(data[n].pnum);
+                        }
+                        myChartbyline.hideLoading();
+                        myChartbyline.setOption({
+                            xAxis:{
+                                data:names
+                            },
+                            series:[{
+                                data:nums
+                            }]
+                        });
+
+                       /* $.each(data.list,function (index,item) {
+                            brower.push({
+                                name:item.pname,
+                                value:item.pnum
+                            })
+                        })
+                        myChartbypie.setOption({
+                            series: [{
+                                data:brower
+                            }]
+                        })*/
+                    }
+                    else {
+                        alert("数据获取错误！")
+                    }
+                },
             })
 
         </script>
 
-        <script type="text/javascript">
+       <%-- <script type="text/javascript">
+            var optionbypie = {
+                title: {
+                    text: '销售报表-饼状图'
+                },
+                series: [{
+                    name: '访问量',
+                    type: 'pie',
+                    radius: '60%',
+                    data: [
+                        {value: 500, name: 'Android'},
+                        {value: 200, name: 'IOS'},
+                        {value: 360, name: 'PC'},
+                        {value: 100, name: 'Ohter'}
+                    ]
+                }]
+            };
+            //初始化echarts实例
+            var myChart = echarts.init(document.getElementById('chartbypie'));
+            //使用制定的配置项和数据显示图表
+            myChart.setOption(optionbypie);
+        </script>--%>
+        <!-- Javascript -->
+        <script type="text/javascript" src="../js/app.js"></script>
+
+
+       <%-- &lt;%&ndash;<script type="text/javascript">
             //指定图标的配置和数据
             var optionbybar = {
                 title:{
@@ -136,30 +205,9 @@
             var myChart = echarts.init(document.getElementById('chartbybar'));
             //使用制定的配置项和数据显示图表
             myChart.setOption(optionbybar);
-        </script>
+        </script>--%>
 
-        <script type="text/javascript">
-        var optionbypie = {
-        title:{
-        text:'销售报表-饼状图'
-        },
-        series:[{
-        name:'访问量',
-        type:'pie',
-        radius:'60%',
-        data:[
-        {value:500,name:'Android'},
-        {value:200,name:'IOS'},
-        {value:360,name:'PC'},
-        {value:100,name:'Ohter'}
-        ]
-        }]
-        };
-        //初始化echarts实例
-        var myChart = echarts.init(document.getElementById('chartbypie'));
-        //使用制定的配置项和数据显示图表
-        myChart.setOption(optionbypie);
-        </script>
+
     </div>
 </div>
 </body>
