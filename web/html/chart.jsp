@@ -35,7 +35,7 @@
                 <div class="page-title">
                     <span class="title">销售报表</span>
                 </div>
-                <div id="chartbyline" style="width:600px; height: 400px;"></div>
+                <div id="chartbyline" style="height: 400px;"></div>
                 <div id="chartbypie" style="width:600px; height: 300px;"></div>
 
 
@@ -74,14 +74,44 @@
                     data:['销量']
                 },
                 xAxis:{
-                    data:[]
+                    data:[],
+                    boundaryGap : true
+                },
+                axisLabel:{
+                    interval:0
                 },
                 yAxis:{},
                 series:[{
                     name:'销量',
                     type:'line',
-                    data:[]
-                }]
+                    data:[],
+                    showAllSymbol: true
+                }],
+                dataZoom : [
+                    {
+                        type: 'slider',
+                        show: true,
+                        start: 94,
+                        end: 100,
+                        handleSize: 8
+                    },
+                    {
+                        type: 'inside',
+                        start: 94,
+                        end: 100
+                    },
+                    {
+                        type: 'slider',
+                        show: true,
+                        yAxisIndex: 0,
+                        filterMode: 'empty',
+                        width: 12,
+                        height: '70%',
+                        handleSize: 8,
+                        showDataShadow: false,
+                        left: '93%'
+                    }
+                ]
             });
 
             //使用制定的配置项和数据显示图表

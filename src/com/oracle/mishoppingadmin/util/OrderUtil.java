@@ -12,27 +12,21 @@ import java.util.UUID;
 public class OrderUtil {
     /**
      * 生成随机订单编号
+     *
      * @return
      */
     public static String getOrderIdByTime() {
-        int machineId = 1;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String newDate = sdf.format(new Date());
-        String result = "";
-        Random random = new Random();
-        for (int i = 0; i < 3; i++) {
-            result += random.nextInt(10);
-        }
-       return  1000+result+newDate ;
+        return "" + 1000 + System.currentTimeMillis() + RandomValueUtil.getNum(1000, 9999);
     }
 
     /**
      * 生成时间
+     *
      * @return
      */
-    public static String getcreatetime(){
-        SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-        String  time = sdf.format(new Date());
+    public static String getNowTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+        String time = sdf.format(new Date());
         return String.valueOf(time);
     }
 }

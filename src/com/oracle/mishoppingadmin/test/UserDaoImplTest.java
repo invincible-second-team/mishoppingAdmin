@@ -1,8 +1,12 @@
 package com.oracle.mishoppingadmin.test;
 
+import com.oracle.mishoppingadmin.bean.Address;
 import com.oracle.mishoppingadmin.bean.Users;
 import com.oracle.mishoppingadmin.dao.UserDao;
 import com.oracle.mishoppingadmin.dao.impl.UserDaoImpl;
+import com.oracle.mishoppingadmin.util.DBUtil;
+import com.oracle.mishoppingadmin.util.RandomValueUtil;
+import org.apache.commons.dbutils.QueryRunner;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -30,13 +34,32 @@ public class UserDaoImplTest {
      */
     @Test
     public void addUsers() throws SQLException {
-        Users users = new Users();
-        users.setUname("zhh1234");
-        users.setUpassword("123");
-        users.setNickname("小可爱");
-        users.setUphone("18871013456");
-        boolean b=userDao.addUsers(users);
-        System.out.println(b);
+
+        for (int i = 0; i < 50; i++) {
+            Users users = new Users();
+            users.setUname(RandomValueUtil.getChineseName());
+            users.setUpassword("123456");
+            users.setNickname("小可爱" + i);
+            users.setUphone(RandomValueUtil.getTelephone());
+            boolean b=userDao.addUsers(users);
+            System.out.println(b);
+        }
+    }
+
+    @Test
+    public void addAddress() throws SQLException {
+
+        for (int i = 0; i < 500; i++) {
+            QueryRunner qr = new QueryRunner(DBUtil.getDataSource());
+            Address address = new Address();
+            address.setAddr(RandomValueUtil.getRoad());
+            address.setUid(RandomValueUtil.getNum(0, 49));
+            address.setAphone(RandomValueUtil.getTelephone());
+
+            String sql = "insert into address(uid, addr, aphone) values (?,?,?)";
+            int update = qr.update(sql, RandomValueUtil.getNum(0, 49), RandomValueUtil.getRoad(), RandomValueUtil.getTelephone());
+            System.out.println(update);
+        }
     }
 
     /**

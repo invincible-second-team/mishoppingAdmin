@@ -207,6 +207,8 @@
                                 alert("导出失败！！！");
                             }
                             $("#exportModal").modal('hide');
+                            $("#startTime").val("");
+                            $("#endTime").val("");
                         }
                     });
                 });

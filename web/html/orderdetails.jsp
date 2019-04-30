@@ -71,10 +71,10 @@
                                                 <tr>
                                                         <td>${d.pid}</td>
                                                         <td>${d.pname}</td>
-                                                        <td><fmt:formatNumber value="${d.pprice}" pattern="00.00#" /></td>
-                                                        <td><fmt:formatNumber value="${d.ppricediscount}" pattern="00.00#" /></td>
+                                                        <td><fmt:formatNumber value="${d.pprice}" pattern="0.00#" /></td>
+                                                        <td><fmt:formatNumber value="${d.ppricediscount}" pattern="0.00#" /></td>
                                                         <td>${d.pnum}</td>
-                                                        <td><fmt:formatNumber value="${d.pprice*d.pnum*d.ppricediscount}" pattern="00.00#" /></td>
+                                                        <td><fmt:formatNumber value="${d.pprice*d.pnum*d.ppricediscount}" pattern="0.00#" /></td>
                                                     <c:set value="${sum+d.pprice*d.pnum*d.ppricediscount}" var="sum" />
                                                 </tr>
                                             </c:forEach>
@@ -85,7 +85,7 @@
                                             <td>订单总价：<fmt:formatNumber value="${sum}" pattern="00.00#" />元</td>
                                             </tr>
                                         </table>
-                                        <button><a href="#" onClick="javascript :history.back(-1);">返回上一页</a></button>
+                                        <button class="btn btn-info"><a href="#" onClick="javascript :history.back(-1);">返回上一页</a></button>
                                     </div>
                                 </div>
                             </div>

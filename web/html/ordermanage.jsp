@@ -5,7 +5,7 @@
 
 <head>
     <c:if test="${empty requestScope.ordersList}">
-        <c:redirect url="/Order?method=ordersList&state=0"></c:redirect>
+        <c:redirect url="/Order?method=ordersList&state=0"/>
     </c:if>
     <title>订单管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
